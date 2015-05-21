@@ -1,9 +1,9 @@
 package com.ozstrategy.webapp.controller;
 
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.apache.commons.beanutils.BeanUtils;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by lihao on 1/23/15.
@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController extends BaseController {
     
     @ExceptionHandler(value = Throwable.class)
-    @RequestMapping(value = "/ji/{id}")
-    public String ji(@PathVariable("id")Long id){
-        
-        System.out.println("sdfd");
+    @RequestMapping(value = "/ji/{id}" )
+    public String ji(@PathVariable("id") Long id,@RequestBody() Long x, HttpServletRequest request){
+        System.out.println("sdfd"+request.getParameter("x"));
         return "dsd"+id;
     }
 }

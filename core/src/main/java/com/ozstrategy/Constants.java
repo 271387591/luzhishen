@@ -15,4 +15,8 @@ public final class Constants {
   public static final String exportFileDir="export";
   public static final String appFileDir="export";
   public static final Integer LIMIT=25;
+
+    public static String MTable="MTable";
+    public static String StandingBook="StandingBook";
+    public static String Template="Template";
 } 

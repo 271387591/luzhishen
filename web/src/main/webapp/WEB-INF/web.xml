@@ -5,7 +5,6 @@
 
     <display-name>rest</display-name>
     <distributable/>
-    <!-- Restlet adapter -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
@@ -13,8 +12,6 @@
             classpath:/applicationContext-dao.xml
             classpath:/applicationContext-service.xml
             classpath*:/applicationContext.xml
-            <!--/WEB-INF/applicationContext*.xml-->
-            /WEB-INF/security.xml
         </param-value>
     </context-param>
     <context-param>
@@ -45,47 +42,14 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     <filter>
-        <filter-name>sessionTimeoutFilter</filter-name>
-        <filter-class>com.ozstrategy.webapp.filter.LoggedFilter</filter-class>
+        <filter-name>rewriteFilter</filter-name>
+        <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>sessionTimeoutFilter</filter-name>
+        <filter-name>rewriteFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <filter>
-        <filter-name>lazyLoadingFilter</filter-name>
-        <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>lazyLoadingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    <filter>
-        <filter-name>securityFilter</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-        <init-param>
-            <param-name>targetBeanName</param-name>
-            <param-value>springSecurityFilterChain</param-value>
-        </init-param>
-    </filter>
-    <filter>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>securityFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
-        <dispatcher>FORWARD</dispatcher>
-        <dispatcher>INCLUDE</dispatcher>
-    </filter-mapping>
-    
-    <filter-mapping>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    
     <servlet>
         <servlet-name>dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -95,18 +59,7 @@
         </init-param>
         <load-on-startup>2</load-on-startup>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>dispatcher</servlet-name>
-        <url-pattern>/service/*</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>dispatcher</servlet-name>
-        <url-pattern>/app/*</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>dispatcher</servlet-name>
-        <url-pattern>/jscripts/*</url-pattern>
-    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/html/*</url-pattern>

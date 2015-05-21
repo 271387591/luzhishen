@@ -59,17 +59,30 @@ public class BaseController {
             if (!enumeration.hasMoreElements())
                 break;
             String property = (String)enumeration.nextElement();
+            if(StringUtils.isNotEmpty(property) && property.startsWith("Q_")){
+                String value = request.getParameter(property);
+                map.put(property,value);
+            }
+        } while (true);
+
+        return map;
+    }
+     public Map<String,Object> requestNoPreMap(HttpServletRequest request){
+        Map<String,Object> map=new HashMap<String, Object>();
+        Enumeration enumeration = request.getParameterNames();
+        do{
+            if (!enumeration.hasMoreElements())
+                break;
+            String property = (String)enumeration.nextElement();
             if(StringUtils.isNotEmpty(property)){
                 String value = request.getParameter(property);
                 map.put(property,value);
             }
         } while (true);
-        if(StringUtils.isEmpty(request.getParameter("limit"))){
-            map.put("limit", Constants.LIMIT);
-        }
-        
+
         return map;
     }
+
     public Integer initLimit(String limit){
         if(NumberUtils.isNumber(limit)){
             return parseInteger(limit);

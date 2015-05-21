@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.ozstrategy</groupId>
         <artifactId>luzhishen</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -179,171 +179,36 @@
                                 <inputDir>${project.build.directory}/${project.build.finalName}/</inputDir>
                                 <!--files to include, path relative to output's directory or absolute path-->
                                 <includes>
-                                    <include>scripts/ux/Ext/ux/growl/ext-growl.js</include>
-                                    <include>scripts/ux/Ext/ux/grid/Printer.js</include>
-                                    <include>scripts/ux/Ext/ux/CheckColumn.js</include>
-                                    <include>scripts/ux/Ext/ux/TabCloseMenu.js</include>
-                                    <include>scripts/ux/Ext/ux/TreePicker.js</include>
-                                    <include>scripts/ux/Ext/ux/data/PagingMemoryProxy.js</include>
-                                    <include>scripts/ux/Ext/ux/statusbar/StatusBar.js</include>
-                                    <include>scripts/ux/Ext/ux/statusbar/ValidationStatus.js</include>
-                                    <include>scripts/ux/Ext/ux/form/SearchField.js</include>
-                                    <include>scripts/ux/Ext/ux/window/Notification.js</include>
-
-                                    <!--<include>scripts/desktop/js/FitAllLayout.js</include>-->
-                                    <include>scripts/desktop/js/Module.js</include>
-                                    <include>scripts/desktop/js/ShortcutModel.js</include>
-                                    <include>scripts/desktop/js/StartMenu.js</include>
-                                    <include>scripts/desktop/js/TaskBar.js</include>
-                                    <include>scripts/desktop/js/Video.js</include>
-                                    <include>scripts/desktop/js/Wallpaper.js</include>
-                                    <include>scripts/desktop/js/Desktop.js</include>
-                                    <include>scripts/desktop/js/App.js</include>
-
-                                    <include>scripts/ux/Oz/access/RoleAccess.js</include>
-
-                                    <include>scripts/ux/Oz/chart/SVGToImageExporter.js</include>
-                                    <include>scripts/ux/Oz/graph/XMLToImgExporter.js</include>
-                                    <include>scripts/ux/Oz/util/ImgPrinter.js</include>
-                                    <include>scripts/ux/Oz/util/AceEditorNav.js</include>
-
-                                    <include>scripts/ux/Oz/data/DwrProxy.js</include>
-                                    <include>scripts/ux/Oz/data/ModelEx.js</include>
-                                    <include>scripts/ux/Oz/data/StoreEx.js</include>
-                                    <include>scripts/ux/Oz/data/AvailableStore.js</include>
-
-                                    <include>scripts/ux/Oz/desktop/Module.js</include>
-
-                                    <include>scripts/ux/Oz/layout/component/form/ListDisplay.js</include>
-                                    <include>scripts/ux/Oz/layout/component/form/MultiSelect.js</include>
-                                    <include>scripts/ux/Oz/form/ExtendMultiSelect.js</include>
-                                    <include>scripts/ux/Oz/layout/component/form/PickList.js</include>
-                                    <include>scripts/ux/Oz/layout/component/form/AceEditor.js</include>
-
-                                    <include>scripts/ux/Oz/picker/Month.js</include>
-
-                                    <include>scripts/ux/Oz/plugins/form/ClearButton.js</include>
-                                    <include>scripts/ux/Oz/plugins/form/ImageButton.js</include>
-                                    <include>scripts/ux/Oz/plugins/form/HelpTextButton.js</include>
-                                    <include>scripts/ux/Oz/plugins/form/ListDisplay.js</include>
-                                    <include>scripts/ux/Oz/plugins/form/SuggestField.js</include>
-                                    <include>scripts/ux/Oz/plugins/form/ScoreCardSuggest.js</include>
-                                    <include>scripts/ux/Oz/plugins/form/TestManagerSuggest.js</include>
-                                    <include>scripts/ux/Oz/plugins/form/ElTestMgrSuggest.js</include>
-                                    <include>scripts/ux/Oz/plugins/form/ComplianceSuggest.js</include>
-                                    <include>scripts/ux/Oz/plugins/form/TreeStrategySuggest.js</include>
-                                    <include>scripts/ux/Oz/plugins/form/VariableSuggest.js</include>
-                                    <include>scripts/ux/Oz/plugins/form/ConfigurationSuggest.js</include>
-                                    <include>scripts/ux/Oz/plugins/form/PaymentVerificationRuleSuggest.js</include>
-                                    <include>scripts/ux/Oz/plugins/form/PromiseVerificationRuleSuggest.js</include>
-                                    <include>scripts/ux/Oz/plugins/form/MaxWrapButton.js</include>
-                                    <include>scripts/ux/Oz/plugins/form/WorkflowSuggest.js</include>
-                                    <include>scripts/ux/Oz/plugins/form/DashboardSuggest.js</include>
-                                    <include>scripts/ux/Oz/plugins/form/QueueAccountExportSuggest.js</include>
-
-                                    <include>scripts/ux/Oz/form/ComboField.js</include>
-                                    <include>scripts/ux/Oz/form/DataDisplayField.js</include>
-                                    <include>scripts/ux/Oz/form/PickList.js</include>
-                                    <include>scripts/ux/Oz/form/ListDisplay.js</include>
-                                    <include>scripts/ux/Oz/form/Month.js</include>
-                                    <include>scripts/ux/Oz/form/MultiSelect.js</include>
-                                    <include>scripts/ux/Oz/form/CKEditor.js</include>
-                                    <include>scripts/ux/Oz/form/AceEditor.js</include>
-                                    <include>scripts/ux/Oz/form/EditArea.js</include>
-                                    <include>scripts/ux/Oz/form/CriteriaEditor.js</include>
-                                    <include>scripts/ux/Oz/form/ComplianceCriteriaEditor.js</include>
-                                    <include>scripts/ux/Oz/form/ConfigurationCriteriaEditor.js</include>
-                                    <include>scripts/ux/Oz/form/ScoreCardCriteriaEditor.js</include>
-                                    <include>scripts/ux/Oz/form/TestManagerCriteriaEditor.js</include>
-                                    <include>scripts/ux/Oz/form/ElTestMgrCriteriaEditor.js</include>
-                                    <include>scripts/ux/Oz/form/TreeStrategyCriteriaEditor.js</include>
-                                    <include>scripts/ux/Oz/form/VariableCriteriaEditor.js</include>
-                                    <include>scripts/ux/Oz/form/WorkflowCriteriaEditor.js</include>
-                                    <include>scripts/ux/Oz/form/DashboardCriteriaEditor.js</include>
-                                    <include>scripts/ux/Oz/form/TreePicker.js</include>
-                                    <include>scripts/ux/Oz/form/FormDataCustomFiled.js</include>
-
-                                    <include>scripts/ux/Oz/form/AutoCombo.js</include>
-                                    <!--<include>scripts/ux/Oz/form/FormHtmlEditor.js</include>-->
-                                    <include>scripts/ux/Oz/form/Downloader.js</include>
-
-                                    <include>scripts/ux/Oz/graph/action/AbstractAction.js</include>
-                                    <include>scripts/ux/Oz/graph/Panel.js</include>
-
-                                    <include>scripts/ux/Oz/grid/feature/Detail.js</include>
-                                    <include>scripts/ux/Oz/grid/feature/Search.js</include>
-                                    <include>scripts/ux/Oz/grid/RowNumber.js</include>
-                                    <include>scripts/ux/Oz/grid/feature/DetailPanel.js</include>
-                                    <include>scripts/ux/Oz/grid/feature/TemplateDetailPanel.js</include>
-                                    <include>scripts/ux/Oz/grid/column/RadioColumn.js</include>
-                                    <include>scripts/ux/Oz/grid/HeaderToolTip.js</include>
-
-                                    <include>scripts/ux/Oz/dd/DragZone.js</include>
-                                    <include>scripts/ux/Oz/dd/ExtendDragZone.js</include>
-                                    <include>scripts/ux/Oz/dd/DropZone.js</include>
-
-                                    <include>scripts/ux/Oz/panel/PickListGrid.js</include>
-                                    <include>scripts/ux/Oz/panel/ProgressMessageBox.js</include>
-
-                                    <include>scripts/ux/Oz/util/Utils.js</include>
-                                    <include>scripts/ux/Oz/util/base64.js</include>
-
-                                    <include>scripts/ux/Oz/form/GeneralImportWin.js</include>
-                                    
-                                    <include>scripts/ozstrategy/global.js</include>
-                                    
-                                    
-                                    <include>scripts/ozstrategy/Constants.js</include>
-
-                                    <include>scripts/ozstrategy/model/LabelValue.js</include>
-                                    <include>scripts/ozstrategy/model/WallpaperModel.js</include>
-
-                                    <include>scripts/ozstrategy/store/Base.js</include>
-
-                                    <include>scripts/ozstrategy/user/model/User.js</include>
-                                    <include>scripts/ozstrategy/user/model/Role.js</include>
-                                    <include>scripts/ozstrategy/user/model/SimpleRole.js</include>
-                                    <include>scripts/ozstrategy/user/model/Feature.js</include>
-                                    <include>scripts/ozstrategy/user/model/SystemView.js</include>
-                                    
-
-                                    <include>scripts/ozstrategy/user/store/SystemView.js</include>
-                                    <include>scripts/ozstrategy/user/store/Users.js</include>
-                                    <include>scripts/ozstrategy/user/store/Roles.js</include>
-                                    <include>scripts/ozstrategy/user/store/AllFeatures.js</include>
-                                    <include>scripts/ozstrategy/user/store/RoleTree.js</include>
-
-
-                                    
-                                    
-                                    <!--user-->
-                                    <include>scripts/ozstrategy/user/view/UserForm.js</include>
-                                    <include>scripts/ozstrategy/user/view/UserView.js</include>
-                                    <include>scripts/ozstrategy/user/view/RoleForm.js</include>
-                                    <include>scripts/ozstrategy/user/view/RoleView.js</include>
-                                    <include>scripts/ozstrategy/user/view/FeatureForm.js</include>
-                                    <include>scripts/ozstrategy/user/view/FeatureView.js</include>
-                                    <include>scripts/ozstrategy/user/view/UserSelector.js</include>
-                                    <include>scripts/ozstrategy/user/view/RoleSelector.js</include>
-
-                                    
-                                    <include>scripts/ozstrategy/Settings.js</include>
-                                    <include>scripts/ozstrategy/ChangePassword.js</include>
-                                    <include>scripts/ozstrategy/UnitUserView.js</include>
-                                    <include>scripts/ozstrategy/App.js</include>
-                                    
-                                    
-                                    <include>scripts/ozstrategy/Constants.js</include>
-                                    <include>scripts/ozstrategy/UserMenu.js</include>
-                                    <include>scripts/ozstrategy/UserToolbar.js</include>
-                                    <include>scripts/ozstrategy/UserHeader.js</include>
-                                    <include>scripts/ozstrategy/UserFooter.js</include>
-                                    <include>scripts/ozstrategy/UserCenterPanel.js</include>
-                                    <include>scripts/ozstrategy/Viewport.js</include>
-                                    
-                                    
-                                    
-                                    
+                                    <include>scripts/app/BaseController.js</include>
+                                    <include>scripts/app/model/DataSource.js</include>
+                                    <include>scripts/app/model/DataSourceField.js</include>
+                                    <include>scripts/app/model/StandingBook.js</include>
+                                    <include>scripts/app/model/Table.js</include>
+                                    <include>scripts/app/model/TableField.js</include>
+                                    <include>scripts/app/model/User.js</include>
+                                    <include>scripts/app/model/Role.js</include>
+                                    <include>scripts/app/model/RoleFieldFeature.js</include>
+                                    <include>scripts/app/store/MainMenu.js</include>
+                                    <include>scripts/app/view/StandingBookModel.js</include>
+                                    <include>scripts/app/view/StandingBookController.js</include>
+                                    <include>scripts/app/view/StandingBookForm.js</include>
+                                    <include>scripts/app/view/FeatureForm.js</include>
+                                    <include>scripts/app/view/StandingBook.js</include>
+                                    <include>scripts/app/view/TableModel.js</include>
+                                    <include>scripts/app/view/TableController.js</include>
+                                    <include>scripts/app/view/DataSourceForm.js</include>
+                                    <include>scripts/app/view/TableForm.js</include>
+                                    <include>scripts/app/view/Table.js</include>
+                                    <include>scripts/app/view/TableTempleModel.js</include>
+                                    <include>scripts/app/view/TableTempleController.js</include>
+                                    <include>scripts/app/view/TableTempleForm.js</include>
+                                    <include>scripts/app/view/TableTemple.js</include>
+                                    <include>scripts/app/main/MainModel.js</include>
+                                    <include>scripts/app/main/MainController.js</include>
+                                    <include>scripts/app/main/MainHeader.js</include>
+                                    <include>scripts/app/main/MainMenu.js</include>
+                                    <include>scripts/app/main/Main.js</include>
+                                    <include>scripts/app/Application.js</include>
                                 </includes>
                             </aggregation>
                         </aggregations>
@@ -376,9 +241,9 @@
                     <artifactId>maven-war-plugin</artifactId>
                     <configuration>
                         <warSourceExcludes>
-                            deploy/**,markup/**,mxgraph/js/*.js,mxgraph/src/js/*.js,scripts/login/**/*.js,scripts/ux/**,scripts/desktop/**/*.js,scripts/ozstrategy/**/*.js,scripts/ext/ext-all-*.js,scripts/ext/ext-c*.js,scripts/ext/ext-d*.js,scripts/ext/ext-f*.js,scripts/ext/ext.js,scripts/ext/boot*.js,scripts/ext/src/**,**/*debug*.js
+                            deploy/**,markup/**,scripts/login/**/*.js,scripts/ux/**,scripts/desktop/**/*.js,scripts/app/**/*.js,scripts/ext/ext-all-*.js,scripts/ext/ext-c*.js,scripts/ext/ext-d*.js,scripts/ext/ext-f*.js,scripts/ext/ext.js,scripts/ext/boot*.js,scripts/ext/src/**,**/*debug*.js
                         </warSourceExcludes>
-                        <packagingExcludes>scripts/ux/**,scripts/desktop/*.js,scripts/desktop/js/*.js,scripts/ozstrategy/**</packagingExcludes>
+                        <packagingExcludes>scripts/ux/**,scripts/desktop/*.js,scripts/desktop/js/*.js,scripts/app/**</packagingExcludes>
                     </configuration>
                 </plugin>
             </plugins>

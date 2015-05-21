@@ -14,35 +14,42 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title><fmt:message key="webapp.name"/></title>
     <c:set var="language"><%=language %></c:set>
-    <link rel="stylesheet" type="text/css" href="<c:url value='/scripts/desktop/css/desktop.css'/>"/>
-    <link rel="stylesheet" type="text/css" href="<c:url value='/scripts/ext/resources/css/ext-all.css'/>"/>
-    <link rel="stylesheet" type="text/css" href="<c:url value='/scripts/ozstrategy/css/flexcenter.css'/>"/>
-    <link rel="stylesheet" type="text/css" href="<c:url value='/scripts/ozstrategy/css/BoxSelect.css'/>"/>
-    <%--<link rel="stylesheet" type="text/css" href="<c:url value='/mxgraph/css/common.css'/>"/>--%>
-    <%--<link rel="stylesheet" type="text/css" href="<c:url value='/mxgraph/css/explorer.css'/>"/>--%>
-    <link rel="stylesheet" type="text/css" href="<c:url value='/scripts/shared/icons.css'/>"/>
-    <link rel="stylesheet" type="text/css" href="<c:url value='/scripts/shared/growl/css/ext-growl.css'/>"/>
-    <%--<link rel="stylesheet" type="text/css" href="<c:url value='/ux/Ext/ux/growl/css/ext-growl.css'/>"/>--%>
-
-    <c:url var="defaultExtTheme" value="/scripts/ext/resources/css/ext-all.css"/>
-    <%--<c:url var="grayExtTheme" value="/scripts/ext/resources/css/ext-all-gray.css"/>--%>
-    <%--<c:url var="accessExtTheme" value="/scripts/ext/resources/css/ext-all-access.css"/>--%>
-    <%--<script type="text/javascript" src="<c:url value='/ext/ext-core.js'/>"></script>--%>
+    <link rel="stylesheet" type="text/css" href="<c:url value='/scripts/ext/packages/ext-theme-crisp/build/resources/ext-theme-crisp-all.css'/>"/>
+    <link rel="stylesheet" type="text/css" href="<c:url value='/scripts/app/css/flexcenter.css'/>"/>
     <script type="text/javascript" src="<c:url value='/scripts/ext/ext-all.js'/>"></script>
-    <%--<script type="text/javascript" src="<c:url value='/scripts/ux/Ext/ux/growl/ext-growl.js'/>"></script>--%>
-    <script type="text/javascript" src="<c:url value="/jscripts/desktopRes.js"/>"></script>
-    <script type="text/javascript" src="<c:url value="/jscripts/jscriptRes.js"/>"></script>
-    <%--<script type="text/javascript" src="<c:url value='/desktop/classes.js'/>"></script>--%>
-    <script type="text/javascript" src="<c:url value='/scripts/ext/locale/ext-lang-${language}.js'/>"></script>
-    <script type="text/javascript" src="<c:url value="/scripts/ckeditor/ckeditor.js"/>"></script>
+    <script type="text/javascript" src="<c:url value='/scripts/ext/packages/ext-locale/build/ext-locale-${language}.js'/>"></script>
+    <script type="text/javascript" src="<c:url value="/desktopRes.js"/>"></script>
+
 
     <script type="text/javascript">
-        extTheme = '<c:url value="/scripts/ext/resources/css/ext-all"/>';
-        basePath = '<c:url value="/"/>';
-        mxBasePath = 'mxgraph/src';
+
+        Ext.Loader.setConfig({
+                    enabled: true,
+                    disableCaching: true
+                }
+        );
+        Ext.Loader.setPath({
+            App: '<c:url value="/demo"/>'
+        });
+        var accessFeature = function(tableId,fieldId){
+
+            for(var i=0;i<accesses.length;i++){
+                if((accesses[i].tableId==tableId) && (accesses[i].fieldId==fieldId)){
+                    return accesses[i];
+                }
+            }
+            return {};
+        };
+        var accessTableFeature = function(tableId,roleId){
+            for(var i=0;i<tableAccesses.length;i++){
+                if((tableAccesses[i].tableId==tableId) && (tableAccesses[i].roleId==roleId)){
+                    return tableAccesses[i];
+                }
+            }
+            return {};
+        };
+
     </script>
-    <%--<script type="text/javascript" src="<c:url value="/mxgraph/src/js/mxClient.js"/>"></script>--%>
-    <%--<script type="text/javascript" src="<c:url value="/mxgraph/js/mxApplication.js"/>"></script>--%>
 
 
   <script type="text/javascript" src='<c:url value="/demo/demo.js"/>'></script>
@@ -56,53 +63,40 @@
 <div id="tmpForm"></div>
 <style type="text/css" >
     .x-message-box .ext-mb-loading {
-        background: url("<c:url value="/scripts/ext/resources/themes/images/default/grid/loading.gif"/>") no-repeat scroll 6px 0 transparent;
+        background: url("<c:url value="/scripts/ext/packages/ext-theme-crisp/build/resources/images/grid/loading.gif"/>") no-repeat scroll 6px 0 transparent;
         height: 52px !important;
     }
 </style>
 <script type="text/javascript">
-    var apps = {};
-    if (globalRes.isAdmin != 'true'){location.href="dispatcherPage.action";}
-    Ext.Loader.setPath({
-        'Ext.ux.desktop': '<c:url value="/demo"/>',
-        'Ext.ux': '<c:url value="/demo"/>',
-        FlexCenter: '<c:url value="/demo"/>',
-        Oz: '<c:url value="/demo"/>'
+    Ext.require([
+        'App.Application'
+    ]);
+    Ext.application({
+        name: 'app',
+        extend: 'App.Application',
+        launch:function(){
+            var oDiv = document.getElementById('loading');
+            oDiv.style.display = "none";
+            for (var i = 0; i < oDiv.childNodes.length; i++)
+                oDiv.removeChild(oDiv.childNodes[i]);
+
+            function doKey(e) {
+                var ev = e || window.event;//bet event obj
+                var obj = ev.target || ev.srcElement;//get event source
+                var t = obj.type || obj.getAttribute('type');//get event soruce type
+
+                if (ev.keyCode == 8 && t == null) {
+                    return false;
+                }
+            }
+
+            if (Ext.isIE) {
+                document.onkeydown = doKey;
+            } else {
+                document.onkeypress = doKey;
+            }
+        }
     });
-
-
-    var flexCenterApp;
-  var treeRegister;
-  var surveyRegister;
-  Ext.onReady(function () {
-    flexCenterApp = new FlexCenter.App();
-    var oDiv = document.getElementById('loading');
-    oDiv.style.display = "none";
-    for (var i = 0; i < oDiv.childNodes.length; i++)
-      oDiv.removeChild(oDiv.childNodes[i]);
-
-    //perform when press backspace on desktop
-    function doKey(e) {
-      var ev = e || window.event;//bet event obj
-      var obj = ev.target || ev.srcElement;//get event source
-      var t = obj.type || obj.getAttribute('type');//get event soruce type
-
-      if (ev.keyCode == 8 && t == null) {
-        return false;
-      }
-//          else if(ev.keyCode == 8 && t != "password" && t != "text" && t != "textarea"){
-//              return false;
-//          }
-    }
-
-    if (Ext.isIE) {
-      //in IE,Chrome
-      document.onkeydown = doKey;
-    } else {
-      //in Firefox,Opera
-      document.onkeypress = doKey;
-    }
-  });
 </script>
 </body>
 </html>

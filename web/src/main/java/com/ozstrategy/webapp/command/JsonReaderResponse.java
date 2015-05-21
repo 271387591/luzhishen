@@ -13,7 +13,7 @@ import java.util.Collection;
  *
  * @param    <T>  Type of Objects that will be converted to Ext.data.Records by the client-side Ext.data.DataReader.
  *
- * @author   <a href="mailto:wangyang@ozstrategy.com">Wangy</a>
+ * @author   <a href="mailto:wangyang@app.com">Wangy</a>
  * @version  $Revision$, 10/27/11 4:36 PM
  */
 public class JsonReaderResponse<T> {
