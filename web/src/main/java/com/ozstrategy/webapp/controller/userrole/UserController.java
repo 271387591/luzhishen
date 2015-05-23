@@ -35,7 +35,7 @@ public class UserController extends BaseController {
     @Autowired 
     private RoleManager roleManager = null;
     protected final transient Log log = LogFactory.getLog(getClass());
-    @RequestMapping(params = "method=listUsers")
+    @RequestMapping("listUsers")
     public JsonReaderResponse<UserCommand> listUsers(HttpServletRequest request) {
         String start=request.getParameter("start");
         String limit=request.getParameter("limit");

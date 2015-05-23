@@ -11,13 +11,13 @@
 
     <http use-expressions="true"  >
         <expression-handler ref="expressionHandler"/>
-        <!--<intercept-url pattern="/service/**" access="hasAnyRole('ROLE_ADMIN,ROLE_USER')"/>-->
+        <intercept-url pattern="/service/**" access="isAuthenticated()"/>
         <!--<intercept-url pattern="/app/passwordHint*" access="hasFeature('sss')"/>-->
         <!--<intercept-url pattern="/app/signup*" access="ROLE_ANONYMOUS,ROLE_ADMIN,ROLE_USER"/>-->
         <!--<intercept-url pattern="/html/**" access="hasAnyRole('ROLE_ADMIN,ROLE_USER')"/>-->
         <form-login login-page="/login" 
                     authentication-failure-url="/login?error=true" 
-                    login-processing-url="/security/login" 
+                    login-processing-url="/j_security_check"
                     always-use-default-target="false"
                     username-parameter="username"
                     password-parameter="password"
