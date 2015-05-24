@@ -25,6 +25,7 @@ Ext.define('App.model.User', {
         }
         },
         'enabled',
-        'accountLocked'
+        'accountLocked',
+        'simpleRoles'
     ]
 });

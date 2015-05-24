@@ -9,6 +9,7 @@ public class SimpleRoleCommand {
     protected Long id;
 
     protected String name;
+    private Boolean isDefault=Boolean.FALSE;
 
     public SimpleRoleCommand() {
     }
@@ -18,7 +19,6 @@ public class SimpleRoleCommand {
         this.id = role.getId();
         this.name = role.getName();
         this.displayName = role.getDisplayName();
-
     }
 
     public SimpleRoleCommand(String name, Long id) {
@@ -48,6 +48,14 @@ public class SimpleRoleCommand {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean getIsDefault() {
+        return isDefault;
+    }
+
+    public void setIsDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
     }
 
     public Role toRole() {

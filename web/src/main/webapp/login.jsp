@@ -20,8 +20,10 @@
         <input type="password" name="password">
     </fieldset>
     <footer>
-        <label style="color: #ff0000;display: none;">Keep me logged in</label>
-        <input type="submit" class="btnLogin" value="Login">
+        <c:if test="${param.error=='true'}">
+            <label style="color: #ff0000;"><fmt:message key="errors.password.mismatch"/> </label>
+        </c:if>
+        <input type="submit" class="btnLogin" value="登录">
     </footer>
 </form>
 <%--<footer id="main">--%>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 
 @Service("genericManager")
@@ -30,7 +31,11 @@ public class GenericManagerImpl<T, PK extends Serializable> extends Observable i
     }
 
     public T get(PK id) {
-        return dao.get(id);
+        try{
+            return dao.get(id);
+        }catch (Exception e){
+        }
+        return null;
     }
 
     public T load(PK id) {
@@ -55,5 +60,17 @@ public class GenericManagerImpl<T, PK extends Serializable> extends Observable i
 
     public void saveOrUpdate(T object) {
         dao.saveOrUpdate(object);
+    }
+
+    public List<T> listPage(Map<String, Object> params, Integer start, Integer limit) {
+        return dao.listPage(params,start,limit);
+    }
+
+    public Integer count(Map<String, Object> params) {
+        return dao.count(params);
+    }
+
+    public List<T> listAll(Map<String, Object> params) {
+        return dao.listAll(params);
     }
 } 

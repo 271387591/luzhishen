@@ -70,7 +70,15 @@ public class BaseController {
         
         return map;
     }
-    public Integer initLimit(String limit){
+    public Integer obtainStart(HttpServletRequest request){
+        String start=request.getParameter("start");
+        if(NumberUtils.isNumber(start)){
+            return Integer.parseInt(start);
+        }
+        return 0;
+    }
+    public Integer obtainLimit(HttpServletRequest request){
+        String limit=request.getParameter("limit");
         if(NumberUtils.isNumber(limit)){
             return parseInteger(limit);
         }

@@ -10,9 +10,8 @@ public final class Constants {
   public final static String USER_NOT_Authentication="USER_NOT_Authentication";
   public final static String YMD="yyyy-MM-dd";
   public final static String YMDHMS="yyyy-MM-dd HH:mm:ss";
-  public static final String imDataDir=System.getProperty("imdata");
-  public static final String picFileDir="pictures";
-  public static final String exportFileDir="export";
-  public static final String appFileDir="export";
   public static final Integer LIMIT=25;
+  public static final String ROLE_ADMIN="ROLE_ADMIN";
+  public static final String Admin="admin";
+
 } 

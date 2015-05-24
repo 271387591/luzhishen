@@ -5,7 +5,8 @@ Ext.define('App.view.user.UserCenter', {
     extend: 'Ext.tab.Panel',
     xtype: 'userCenter',
     requires: [
-        'App.view.user.UserList'
+        'App.view.user.UserList',
+        'App.view.user.RoleList'
     ],
     ui: 'navigation',
     tabPosition:'left',
@@ -17,7 +18,7 @@ Ext.define('App.view.user.UserCenter', {
         title: '用户管理',
         iconCls: 'exec-quarterly-icon'
     },{
-        xtype: 'panel',
+        xtype: 'roleList',
         title: '角色管理',
         iconCls: 'exec-pl-icon'
     }]

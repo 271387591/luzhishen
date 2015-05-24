@@ -48,4 +48,5 @@
             <beans:bean class="com.ozstrategy.webapp.security.WebSecurityExpressionRoot"/>
         </beans:property>
     </beans:bean>
+    <global-method-security pre-post-annotations="enabled"/>
 </beans:beans>

@@ -42,7 +42,6 @@ public class LoggedFilter implements Filter {
       if(username == null)   {
 //         ((HttpServletResponse)response).setStatus(500,"sessiontimeout");
 //        System.out.println("timeout");
-        res.addHeader("sessionstatus", "timeout");
         res.setHeader("sessionstatus", "timeout");
       }  else {
        chain.doFilter(request,response);

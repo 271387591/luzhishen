@@ -1,16 +1,22 @@
-/*html{*/
-  /*-webkit-text-size-adjust:none;*/
-/*}*/
-/*.x-field.x-window-text.x-form-item.x-field-default.x-anchor-form-item{*/
-  /*width: 100%;*/
-/*}*/
+html{
+    -webkit-text-size-adjust:none;
+}
+.x-field.x-window-text.x-form-item.x-field-default.x-anchor-form-item{
+    width: 100%;
+}
+.flow-form-table{
+
+}
+.blue-grid-row TD{
+    color:blue !important;
+}
 .user-edit {
-  background-image: url(icons/user_edit.gif) !important;
+    background-image: url(icons/user_edit.gif) !important;
     width: 16px;
     height: 16px;
 }
 .icon-user {
-  background-image: url(icons/user.png) !important;
+    background-image: url(icons/user.png) !important;
     width: 16px;
     height: 16px;
 }
@@ -42,10 +48,16 @@
     height: 16px;
 }
 .clear {
-    background-image: url(icons/reset.png) !important;
+    background-image: url(icons/clear.png) !important;
     width: 16px;
     height: 16px;
 }
+.close {
+    background-image: url(icons/close.png) !important;
+    width: 16px;
+    height: 16px;
+}
+
 .refresh,.btn-refresh{
     background-image: url(icons/refresh.png) !important;
     width: 16px;
@@ -71,6 +83,18 @@
     width: 16px;
     height: 16px;
 }
+.table-add {
+    background-image: url(icons/table_add.png) !important;
+}
+
+.table-edit {
+    background-image: url(icons/table_edit.png) !important;
+}
+.table-delete {
+    background-image: url(icons/table_delete.png) !important;
+    height: 16px;
+    width: 16px;
+}
 .cut {
     background: url(icons/cut.gif) no-repeat !important;
     width: 16px;
@@ -94,6 +118,17 @@
     width: 16px;
     height: 16px;
 }
+.btn-authorization {
+    background-image: url(icons/key_add.png) !important;
+    width: 16px;
+    height: 16px;
+}
+.btn-dis-authorization {
+    background-image: url(icons/key_delete.png) !important;
+    width: 16px;
+    height: 16px;
+}
+
 .btn-preview {
     background: url(icons/preview.png) no-repeat !important;
     width: 16px;
@@ -121,16 +156,11 @@
 .disabled-row .x-grid-cell-inner {
     color: darkgray;
 }
-.logout {
-    background-image: url(icons/logout.png) !important;
-    width: 16px;
-    height: 16px;
-}
 .manageUser-shortcut img {
-  width: 48px;
-  height: 48px;
-  background-image: url(icons/im48x48.png);
-  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src = '../styles/default/desktop/images/im48x48.png', sizingMethod = 'scale');
+    width: 48px;
+    height: 48px;
+    background-image: url(icons/im48x48.png);
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src = '../styles/default/desktop/images/im48x48.png', sizingMethod = 'scale');
 }
 .icon-tsm {
     background-image: url(icons/FlexCenter_BW3D_16.gif) !important;
@@ -148,8 +178,14 @@
     top:50%;
     left:50%;
     width:70px;height:70px;
-    background-image: url(icons/loading70X702.gif) !important; * jawr:base64-skip 
+    background-image: url(icons/loading70X702.gif) !important; * jawr:base64-skip
 }
+.loading-ux{
+    width: 16px;
+    height: 16px;
+    background-image: url(icons/ajax-loading.gif) !important; * jawr:base64-skip
+}
+
 
 .ozMiddleIcon {
     margin-left: 10px;
@@ -229,6 +265,18 @@
     height: 48px;
     background-image: url(icons/workflowManager.png);
 }
+.form-manager {
+    width: 48px;
+    height: 48px;
+    background-image: url(icons/table_manager.png);
+}
+.table_manager16 {
+    width: 16px;
+    height: 16px;
+    background-image: url(icons/table_manager16.png);
+}
+
+
 .icon-globalType {
     background-image: url(icons/type-16.png) !important;
     width: 16px;
@@ -240,72 +288,52 @@
     background-image: url(icons/type-48.png);
     /*filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../styles/default/desktop/images/type-48.png', sizingMethod='scale');*/
 }
-.zoom {
-    background-image: url(../../../mxgraph/images/zoom.gif) !important;
+.appStore-shortcut img {
+    width: 48px;
+    height: 48px;
+    background-image: url(icons/app_store.png);
+    /*filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../styles/default/desktop/images/type-48.png', sizingMethod='scale');*/
+}
+.appStore-shortcut-16 {
     width: 16px;
     height: 16px;
+    background-image: url(icons/app_store16.png);
 }
 
-.zoomIn {
-    background-image: url(../../../mxgraph/images/zoomin.gif) !important;
+.project-shortcut img {
+    width: 48px;
+    height: 48px;
+    background-image: url(icons/project.png);
+    /*filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../styles/default/desktop/images/type-48.png', sizingMethod='scale');*/
+}
+.search-shortcut img {
+    width: 48px;
+    height: 48px;
+    background-image: url(icons/search_manager.png);
+}
+.search-shortcut-16 {
     width: 16px;
     height: 16px;
+    background-image: url(icons/search_manager16_16.png);
 }
 
-.zoomOut {
-    background-image: url(../../../mxgraph/images/zoomout.gif) !important;
+.export-shortcut img {
+    width: 48px;
+    height: 48px;
+    background-image: url(icons/export.png);
+    /*filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../styles/default/desktop/images/type-48.png', sizingMethod='scale');*/
+}
+.export-shortcut-16 {
     width: 16px;
     height: 16px;
-}
-
-.zoomActual {
-    background-image: url(../../../mxgraph/images/zoomactual.gif) !important;
-    width: 16px;
-    height: 16px;
-}
-
-.fit {
-    background-image: url(../../../mxgraph/images/fit.gif) !important;
-    width: 16px;
-    height: 16px;
+    background-image: url(icons/export16.png);
+    /*filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../styles/default/desktop/images/type-48.png', sizingMethod='scale');*/
 }
 
 
-.export {
-    background-image: url(../../../mxgraph/images/export.png) !important;
-    width: 16px;
-    height: 16px;
-}
 
-.import {
-    background-image: url(../../../mxgraph/images/import.png) !important;
-    width: 16px;
-    height: 16px;
-}
 
-.mxGraphRemove {
-    background-image: url(../../../mxgraph/images/delete2.png) !important;
-    width: 16px;
-    height: 16px;
-}
 
-.undo {
-    background-image: url(../../../mxgraph/images/undo.gif) !important;
-    width: 16px;
-    height: 16px;
-}
-
-.redo {
-    background-image: url(../../../mxgraph/images/redo.gif) !important;
-    width: 16px;
-    height: 16px;
-}
-
-.mxGraphRefresh {
-    background-image: url(../../../mxgraph/images/refresh.gif) !important;
-    width: 16px;
-    height: 16px;
-}
 .btn-flow-design {
     background-image: url(icons/flow_design.png) !important;
     width: 16px;
@@ -464,6 +492,69 @@
     width: 16px;
     height: 16px;
 }
+.task-instance {
+    background: url('icons/workflow-manager.png') !important;
+    width: 16px;
+    height: 16px;
+}
+
+.form-options {
+    background: url('icons/options.png') !important;
+    width: 16px;
+    height: 16px;
+}
+
+
+.icon-publish {
+    background-image:url(icons/icon-publish.png) !important;
+}
+.deploy {
+    background-image: url(icons/deploy.png) !important;
+}
+.view_tree {
+    background-image: url(icons/view_tree.png) !important;
+}
+.file-download {
+    background-image: url(icons/download_file.png) !important;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+.save {
+    background-image: url(icons/save.gif) !important;
+}
+.messageTip {
+    background-image: url(icons/newpm.gif) !important;
+}
+.user-man16{
+    background-image: url(icons/user16x16.png) !important;
+    width: 16px;
+    height: 16px;
+}
+.project-in{
+    background-image: url(icons/project_in.png);
+    width: 16px;
+    height: 16px;
+}
+.exit_project{
+    background-image: url(icons/exit.png);
+    width: 16px;
+    height: 16px;
+}
+.gnome_logout{
+    background-image: url(icons/gnome_logout.png);
+    width: 16px;
+    height: 16px;
+}
+
+
+
+
+
+
+
+
+
 
 
 

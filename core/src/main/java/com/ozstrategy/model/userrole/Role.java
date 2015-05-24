@@ -6,11 +6,9 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Role extends BaseEntity implements GrantedAuthority {
@@ -25,7 +23,17 @@ public class Role extends BaseEntity implements GrantedAuthority {
     private String displayName;
     @Column(columnDefinition = "char",length = 1)
     @Type(type = "yes_no")
-    private Boolean enabled;
+    private Boolean enabled=Boolean.TRUE;
+    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "roles")
+    private Set<User> users=new HashSet<User>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name               = "RoleFeature",
+            joinColumns        = { @JoinColumn(name = "roleId") },
+            inverseJoinColumns = @JoinColumn(name = "featureId")
+    )
+    private Set<Feature> features=new HashSet<Feature>();
     
     public Role() {
     }
@@ -76,6 +84,22 @@ public class Role extends BaseEntity implements GrantedAuthority {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
+    public Set<Feature> getFeatures() {
+        return features;
+    }
+
+    public void setFeatures(Set<Feature> features) {
+        this.features = features;
     }
 
     @Override

@@ -9,7 +9,8 @@ Ext.define('App.main.TabCenter', {
         'App.main.MainController',
         'App.main.MainHeader',
         'Ext.ux.window.AnimWindow',
-        'App.view.user.UserCenter'
+        'App.view.user.UserCenter',
+        'App.view.appstore.AppStore'
     ],
     controller: 'main',
     viewModel: {
@@ -98,6 +99,10 @@ Ext.define('App.main.TabCenter', {
     },{
         xtype: 'userCenter',
         title: '用户模块',
+        iconCls: 'exec-news-icon'
+    },{
+        xtype: 'appStore',
+        title: '应用版本管理',
         iconCls: 'exec-news-icon'
     }]
 });

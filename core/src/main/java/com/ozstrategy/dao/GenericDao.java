@@ -27,5 +27,8 @@ public interface GenericDao<T, PK extends Serializable> {
 
     void remove(T object);
 
-
-} 
+    List<T> listPage(Map<String,Object> params,Integer start,Integer limit);
+    Integer count(Map<String,Object> params);
+    List<T> listAll(Map<String,Object> params);
+    T getByParams(Map<String,Object> params);
+}

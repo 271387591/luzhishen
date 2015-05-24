@@ -4,110 +4,118 @@
         <column>id</column>
         <column>createDate</column>
         <column>lastUpdateDate</column>
-        <column>criteria</column>
+        <column>parentId</column>
         <column>description</column>
         <column>displayName</column>
-        <column>enabled</column>
         <column>name</column>
         <row>
             <value>1</value>
             <value><![CDATA[2013-01-27 11:27:03.0]]></value>
             <value><![CDATA[2014-07-25 13:51:42.0]]></value>
-            <value>user</value>
-            <value>添加角色</value>
-            <value>添加角色</value>
-            <value>1</value>
-            <value>addRole</value>
+            <null/>
+            <value>用户模块</value>
+            <value>用户模块</value>
+            <value>userModule</value>
         </row>
         <row>
             <value>2</value>
             <value><![CDATA[2013-01-27 11:27:03.0]]></value>
-            <value><![CDATA[2014-07-25 13:51:49.0]]></value>
-            <value>user</value>
-            <value>编辑角色</value>
-            <value>编辑角色</value>
+            <value><![CDATA[2014-07-25 13:51:42.0]]></value>
             <value>1</value>
-            <value>updateRole</value>
+            <value>用户管理</value>
+            <value>用户管理</value>
+            <value>user</value>
         </row>
         <row>
             <value>3</value>
-            <value><![CDATA[2013-01-27 11:27:03.0]]></value>
-            <value><![CDATA[2014-07-25 13:52:04.0]]></value>
-            <value>user</value>
-            <value>删除角色</value>
-            <value>删除角色</value>
-            <value>1</value>
-            <value>deleteRole</value>
-        </row>
-        <row>
-            <value>4</value>
             <value><![CDATA[2014-07-25 13:46:30.0]]></value>
             <value><![CDATA[2014-07-25 13:46:30.0]]></value>
-            <value>user</value>
+            <value>2</value>
             <value>添加用户</value>
             <value>添加用户</value>
-            <value>1</value>
             <value>addUser</value>
         </row>
         <row>
-            <value>5</value>
+            <value>4</value>
             <value><![CDATA[2014-07-25 13:47:55.0]]></value>
             <value><![CDATA[2014-07-25 13:47:55.0]]></value>
-            <value>user</value>
+            <value>2</value>
             <value>修改用户</value>
             <value>修改用户</value>
-            <value>1</value>
             <value>updateUser</value>
         </row>
         <row>
-            <value>6</value>
+            <value>5</value>
             <value><![CDATA[2014-07-25 13:48:38.0]]></value>
             <value><![CDATA[2014-07-25 13:48:38.0]]></value>
-            <value>user</value>
+            <value>2</value>
             <value>修改用户密码</value>
             <value>修改用户密码</value>
-            <value>1</value>
             <value>updateUserPassword</value>
         </row>
         <row>
-            <value>7</value>
+            <value>6</value>
             <value><![CDATA[2014-07-25 13:49:06.0]]></value>
             <value><![CDATA[2014-07-25 13:49:06.0]]></value>
-            <value>user</value>
+            <value>2</value>
             <value>锁定用户</value>
             <value>锁定用户</value>
-            <value>1</value>
             <value>lockUser</value>
+        </row>
+        <row>
+            <value>7</value>
+            <value><![CDATA[2014-07-25 13:49:31.0]]></value>
+            <value><![CDATA[2014-07-25 13:49:31.0]]></value>
+            <value>2</value>
+            <value>解锁用户</value>
+            <value>解锁用户</value>
+            <value>unLockUser</value>
         </row>
         <row>
             <value>8</value>
             <value><![CDATA[2014-07-25 13:49:31.0]]></value>
             <value><![CDATA[2014-07-25 13:49:31.0]]></value>
-            <value>user</value>
-            <value>解锁用户</value>
-            <value>解锁用户</value>
-            <value>1</value>
-            <value>unLockUser</value>
+            <value>2</value>
+            <value>删除用户</value>
+            <value>删除用户</value>
+            <value>removeUser</value>
         </row>
         <row>
             <value>9</value>
-            <value><![CDATA[2014-07-25 13:49:59.0]]></value>
-            <value><![CDATA[2014-07-25 13:49:59.0]]></value>
-            <value>user</value>
-            <value>禁用用户</value>
-            <value>禁用用户</value>
+            <value><![CDATA[2013-01-27 11:27:03.0]]></value>
+            <value><![CDATA[2014-07-25 13:51:42.0]]></value>
             <value>1</value>
-            <value>disableUser</value>
+            <value>角色管理</value>
+            <value>角色管理</value>
+            <value>role</value>
         </row>
+
         <row>
             <value>10</value>
-            <value><![CDATA[2014-07-25 13:50:23.0]]></value>
-            <value><![CDATA[2014-07-25 13:50:23.0]]></value>
-            <value>user</value>
-            <value>解禁用户</value>
-            <value>解禁用户</value>
-            <value>1</value>
-            <value>enableUser</value>
+            <value><![CDATA[2013-01-27 11:27:03.0]]></value>
+            <value><![CDATA[2014-07-25 13:51:49.0]]></value>
+            <value>9</value>
+            <value>编辑角色</value>
+            <value>编辑角色</value>
+            <value>updateRole</value>
+        </row>
+        <row>
+            <value>11</value>
+            <value><![CDATA[2013-01-27 11:27:03.0]]></value>
+            <value><![CDATA[2014-07-25 13:52:04.0]]></value>
+            <value>9</value>
+            <value>删除角色</value>
+            <value>删除角色</value>
+            <value>deleteRole</value>
+        </row>
+        <row>
+            <value>12</value>
+            <value><![CDATA[2013-01-27 11:27:03.0]]></value>
+            <value><![CDATA[2014-07-25 13:52:04.0]]></value>
+            <value>9</value>
+            <value>添加角色</value>
+            <value>添加角色</value>
+            <value>addRole</value>
         </row>
     </table>
     <table name="Role">
@@ -125,7 +133,7 @@
             <value>分公司用户，录入分公司的销售数据</value>
             <value>分公司用户</value>
             <value>ROLE_USER</value>
-            <value>1</value>
+            <value>Y</value>
         </row>
         <row>
             <value>-1</value>
@@ -134,82 +142,49 @@
             <value>超级管理员，具有管理的全部权限</value>
             <value>超级管理员</value>
             <value>ROLE_ADMIN</value>
-            <value>1</value>
+            <value>Y</value>
         </row>
     </table>
     <table name="RoleFeature">
-        <column>id</column>
-        <column>createDate</column>
-        <column>lastUpdateDate</column>
         <column>featureId</column>
         <column>roleId</column>
         <row>
             <value>1</value>
-            <value><![CDATA[2014-07-25 14:22:04.0]]></value>
-            <value><![CDATA[2014-07-25 14:22:04.0]]></value>
-            <value>1</value>
             <value>-1</value>
         </row>
         <row>
-            <value>2</value>
-            <value><![CDATA[2014-07-25 14:22:04.0]]></value>
-            <value><![CDATA[2014-07-25 14:22:04.0]]></value>
             <value>2</value>
             <value>-1</value>
         </row>
         <row>
             <value>3</value>
-            <value><![CDATA[2014-07-25 14:22:04.0]]></value>
-            <value><![CDATA[2014-07-25 14:22:04.0]]></value>
-            <value>3</value>
             <value>-1</value>
         </row>
         <row>
-            <value>4</value>
-            <value><![CDATA[2014-07-25 14:22:04.0]]></value>
-            <value><![CDATA[2014-07-25 14:22:04.0]]></value>
             <value>4</value>
             <value>-1</value>
         </row>
         <row>
             <value>5</value>
-            <value><![CDATA[2014-07-25 14:22:04.0]]></value>
-            <value><![CDATA[2014-07-25 14:22:04.0]]></value>
-            <value>5</value>
             <value>-1</value>
         </row>
         <row>
-            <value>6</value>
-            <value><![CDATA[2014-07-25 14:22:04.0]]></value>
-            <value><![CDATA[2014-07-25 14:22:04.0]]></value>
             <value>6</value>
             <value>-1</value>
         </row>
         <row>
             <value>7</value>
-            <value><![CDATA[2014-07-25 14:22:04.0]]></value>
-            <value><![CDATA[2014-07-25 14:22:04.0]]></value>
-            <value>7</value>
             <value>-1</value>
         </row>
         <row>
-            <value>8</value>
-            <value><![CDATA[2014-07-25 14:22:04.0]]></value>
-            <value><![CDATA[2014-07-25 14:22:04.0]]></value>
             <value>8</value>
             <value>-1</value>
         </row>
         <row>
             <value>9</value>
-            <value><![CDATA[2014-07-25 14:22:04.0]]></value>
-            <value><![CDATA[2014-07-25 14:22:04.0]]></value>
-            <value>9</value>
             <value>-1</value>
         </row>
         <row>
-            <value>10</value>
-            <value><![CDATA[2014-07-25 14:22:04.0]]></value>
-            <value><![CDATA[2014-07-25 14:22:04.0]]></value>
             <value>10</value>
             <value>-1</value>
         </row>
@@ -239,6 +214,7 @@
         <column>username</column>
         <column>version</column>
         <column>website</column>
+        <column>roleId</column>
         <row>
             <value>1</value>
             <value><![CDATA[2013-01-27 11:27:03.0]]></value>
@@ -263,6 +239,7 @@
             <value>admin</value>
             <value>1</value>
             <value>http://www.cnblogs.com/hk-jiujiu</value>
+            <value>-1</value>
         </row>
     </table>
     <table name="UserRole">

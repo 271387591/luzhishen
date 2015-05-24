@@ -2,14 +2,9 @@ package com.ozstrategy.webapp.command.userrole;
 
 import com.ozstrategy.model.userrole.Feature;
 import com.ozstrategy.model.userrole.Role;
-import com.ozstrategy.model.userrole.RoleFeature;
 import com.ozstrategy.model.userrole.User;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 public class UserCommand {
@@ -19,20 +14,10 @@ public class UserCommand {
     private String firstName;
     private String lastName;
     private Long id;
-
-
     private String password;
-
-
     private String roleDisplayName;
-
-
     private Long roleId;
-
-
     private List<Long> roleIds = new ArrayList<Long>();
-
-
     private String roleName;
     private List<SimpleRoleCommand> simpleRoles = new ArrayList<SimpleRoleCommand>();
 
@@ -63,28 +48,32 @@ public class UserCommand {
         this.email = user.getEmail();
         this.mobile = user.getMobile();
         this.gender = user.getGender();
+        Role defRole=user.getRole();
+        if(defRole!=null){
+            this.roleId=defRole.getId();
+            this.roleName=defRole.getName();
+            this.roleDisplayName=defRole.getDisplayName();
+        }
 
+        Set<Feature> featureList=new HashSet<Feature>();
         if ((user.getRoles() != null) && (user.getRoles().size() > 0)) {
             for (Role role : user.getRoles()) {
-                this.roleId = role.getId();
-                this.roleName = role.getName();
-                this.roleDisplayName = role.getDisplayName();
                 SimpleRoleCommand simpleRoleCommand = new SimpleRoleCommand();
-                simpleRoleCommand.setId(roleId);
-                simpleRoleCommand.setDisplayName(roleDisplayName);
-                simpleRoleCommand.setName(roleName);
+                simpleRoleCommand.setId(role.getId());
+                simpleRoleCommand.setDisplayName(role.getDisplayName());
+                simpleRoleCommand.setName(role.getName());
+                if(role.getId()==roleId){
+                    simpleRoleCommand.setIsDefault(true);
+                }
                 this.simpleRoles.add(simpleRoleCommand);
+                featureList.addAll(role.getFeatures());
             }
+        }
+        for(Feature feature:featureList){
+            this.features.add(feature.getName());
         }
     }
 
-    public UserCommand populate(List<RoleFeature> roleFeatures) {
-        for (RoleFeature rf : roleFeatures) {
-            Feature feature = rf.getFeature();
-            this.features.add(feature.getName());
-        }
-        return this;
-    }
 
     public String getLastName() {
         return lastName;
@@ -238,4 +227,5 @@ public class UserCommand {
     public void setGender(String gender) {
         this.gender = gender;
     }
+
 } 

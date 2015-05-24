@@ -30,15 +30,18 @@ Ext.define('App.main.MainHeader', {
                         },
                         {
                             xtype: 'button',
-                            text: 'Medium',
+                            text: globalRes.userName,
                             scale: 'small',
-                            menu: [{
-                                text:'Menu Item 1'
-                            },{
-                                text:'Menu Item 2'
-                            },{
-                                text:'Menu Item 3'
-                            }]
+                            menu: [
+                                {
+                                    text:'修改密码'
+                                },{
+                                    text:'安全退出',
+                                    handler:function(){
+                                        document.location.replace(globalRes.logoutUrl);
+                                    }
+                                }
+                            ]
                         }
                     ]
                 }

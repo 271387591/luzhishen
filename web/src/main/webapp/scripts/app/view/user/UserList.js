@@ -21,11 +21,7 @@ Ext.define('App.view.user.UserList', {
             text:globalRes.buttons.add,
             handler: 'onAddClick'
         },
-        {
-            iconCls:'user-edit',
-            text:globalRes.buttons.edit,
-            handler: 'onEditClick'
-        },
+
         {
             iconCls:'user-edit',
             text:userRoleRes.passwordTilte,
@@ -37,17 +33,9 @@ Ext.define('App.view.user.UserList', {
             handler: 'onLockUserClick'
         },
         {
-            iconCls:'user-delete',
-            text:userRoleRes.disableUser,
-            handler: 'onDisableUserClick'
-        },{
             iconCls:'user-edit',
             text:userRoleRes.unLockUser,
             handler: 'onUnLockUserClick'
-        },{
-            iconCls:'user-edit',
-            text:userRoleRes.unDisableUser,
-            handler: 'onUnDisableUserClick'
         }
     ],
     border: false,
@@ -60,7 +48,7 @@ Ext.define('App.view.user.UserList', {
         ftype: 'search',
         disableIndexes: ['username', 'fullName'],
         paramNames: {
-            fields: 'fields',
+            fields: ['Q_username_LK_OR','Q_firstName_LK_OR','Q_lastName_LK_OR'],
             query: 'keyword'
         },
         searchMode: 'remote'
@@ -86,7 +74,7 @@ Ext.define('App.view.user.UserList', {
         },
         {
             header: userRoleRes.header.defaultRoleName,
-            dataIndex: 'defaultRoleDisplayName'
+            dataIndex: 'roleDisplayName'
         },
         {
             header:userRoleRes.header.accountLocked,
@@ -96,15 +84,26 @@ Ext.define('App.view.user.UserList', {
             }
         },
         {
-            header:userRoleRes.header.enabled,
-            dataIndex:'enabled',
-            renderer: function(v){
-                return v?globalRes.yes:globalRes.no;
-            }
-        },
-        {
             header: globalRes.header.createDate,
             dataIndex: 'createDate'
+        },
+        {
+            xtype:'actioncolumn',
+            width:120,
+            header: '操作',
+            items:[
+                {
+                    iconCls:'user-edit',
+                    tooltip:'编辑',
+                    handler:'onEditClick'
+                },
+                '-',
+                {
+                    iconCls:'user-delete',
+                    tooltip:'删除',
+                    handler:'deleteClick'
+                }
+            ]
         }
     ]
 });

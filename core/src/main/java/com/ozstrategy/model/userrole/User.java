@@ -26,7 +26,6 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 @Entity
-
 public class User extends BaseEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -73,14 +72,14 @@ public class User extends BaseEntity implements UserDetails {
             joinColumns        = { @JoinColumn(name = "userId") },
             inverseJoinColumns = @JoinColumn(name = "roleId")
     )
-    @ManyToMany(
-            fetch   = FetchType.LAZY,
-            cascade = {CascadeType.ALL}
-    )
+    @ManyToMany(fetch   = FetchType.LAZY)
     private Set<Role> roles              = new HashSet<Role>();
     
     @Transient
     private String fullName;
+    @ManyToOne
+    @JoinColumn(name = "roleId")
+    private Role role;
 
     public User() {
     }
@@ -274,6 +273,14 @@ public class User extends BaseEntity implements UserDetails {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override

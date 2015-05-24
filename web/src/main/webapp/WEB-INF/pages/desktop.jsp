@@ -17,8 +17,8 @@
     <script type="text/javascript" src="<c:url value='/scripts/ext/ext-all.js'/>"></script>
     <script type="text/javascript" src="<c:url value="/jscripts/desktopRes.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/jscripts/jscriptRes.js"/>"></script>
-    <%--<script type="text/javascript" src="<c:url value='/scripts/ext/locale/ext-lang-${language}.js'/>"></script>--%>
-    <script type="text/javascript" src='<c:url value="/scripts/ozstrategy/global.js"/>'></script>
+    <script type="text/javascript" src="<c:url value='/scripts/ext/packages/ext-locale/build/ext-locale-zh_CN.js'/>"></script>
+    <script type="text/javascript" src='<c:url value="/scripts/app/global.js"/>'></script>
 
 
   <script type="text/javascript">
@@ -42,20 +42,20 @@
 <div id="tmpForm"></div>
 
 <script type="text/javascript">
-//    Ext.require([
-//        'App.Application'
-//    ]);
-//    Ext.application({
-//        name: 'app',
-//        extend: 'App.Application',
-//        launch:function(){
-//            var oDiv = document.getElementById('loading');
-//            oDiv.style.display = "none";
-//            for (var i = 0; i < oDiv.childNodes.length; i++)
-//                oDiv.removeChild(oDiv.childNodes[i]);
-//        }
-//    });
-    
+    Ext.require([
+        'App.Application'
+    ]);
+    Ext.application({
+        name: 'app',
+        extend: 'App.Application',
+        launch:function(){
+            var oDiv = document.getElementById('loading');
+            oDiv.style.display = "none";
+            for (var i = 0; i < oDiv.childNodes.length; i++)
+                oDiv.removeChild(oDiv.childNodes[i]);
+        }
+    });
+
 </script>
 </body>
 </html>

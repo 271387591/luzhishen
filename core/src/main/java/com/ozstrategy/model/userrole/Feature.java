@@ -5,12 +5,10 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity 
 public class Feature extends BaseEntity implements Serializable {
@@ -24,10 +22,7 @@ public class Feature extends BaseEntity implements Serializable {
     @Column(length = 512)
     private String description;
     @Column
-    private String criteria;
-    @Column(columnDefinition = "char",length = 1)
-    @Type(type = "yes_no")
-    private Boolean  enabled=Boolean.TRUE;
+    private Long parentId;
 
     public Feature() {
     }
@@ -64,20 +59,12 @@ public class Feature extends BaseEntity implements Serializable {
         this.description = description;
     }
 
-    public Boolean getEnabled() {
-        return enabled;
+    public Long getParentId() {
+        return parentId;
     }
 
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public String getCriteria() {
-        return criteria;
-    }
-
-    public void setCriteria(String criteria) {
-        this.criteria = criteria;
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 
     @Override

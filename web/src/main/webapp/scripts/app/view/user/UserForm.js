@@ -18,13 +18,12 @@ Ext.define('App.view.user.UserForm', {
     layout: 'fit',
     resizable: false,
     modal: true,
-    width: 800,
+    width: 700,
     border:true,
     autoHeight: true,
     initComponent: function () {
         var me = this;
         var roleStore=me.roleStore;
-        roleStore.load();
         me.items=[
             {
                 buttons: [
@@ -38,7 +37,7 @@ Ext.define('App.view.user.UserForm', {
                         text: globalRes.buttons.cancel,
                         handler: function () {
                             var win = this.up('window');
-                            win.onCancel();
+                            win.close();
                         }
                     }
                 ],
@@ -47,9 +46,6 @@ Ext.define('App.view.user.UserForm', {
                 frame:true,
                 bodyPadding: 5,
                 layout: 'anchor',
-                //defaults: {
-                //    anchor: '50%'
-                //},
                 items: [
                     {
                         xtype: 'fieldset',
@@ -68,8 +64,8 @@ Ext.define('App.view.user.UserForm', {
                             },
                             {
                                 xtype: 'hidden',
-                                bind:'{rec.defaultRoleId}',
-                                name: 'defaultRoleId'
+                                itemId:'roleId',
+                                bind:'{rec.roleId}'
                             },
                             {
                                 fieldLabel: '<font color="red">*</font>'+userRoleRes.header.username,
@@ -136,15 +132,23 @@ Ext.define('App.view.user.UserForm', {
                                 fieldLabel:'<font color="red">*</font>'+userRoleRes.header.gender,
                                 xtype:'combo',
                                 name:'gender',
-                                mode:'local',
                                 editable:false,
                                 triggerAction:'all',
                                 bind:'{rec.gender}',
-                                store:[
-                                    ['M', globalRes.header.man],
-                                    ['F', globalRes.header.woman]
-                                ],
-                                value:'M'
+                                displayField:'name',
+                                valueField:'value',
+                                queryMode: 'local',
+                                store:Ext.create('Ext.data.Store',{
+                                    fields:['value','name'],
+                                    data:[
+                                        {
+                                            name:globalRes.header.man,value:'M'
+                                        },
+                                        {
+                                            name:globalRes.header.woman,value:'F'
+                                        }
+                                    ]
+                                })
                             },{
                                 fieldLabel: '<font color="red">*</font>'+userRoleRes.header.mobile,
                                 name: 'mobile',
@@ -164,29 +168,84 @@ Ext.define('App.view.user.UserForm', {
                                 bind:'{rec.email}',
                                 blankText:globalRes.tooltip.notEmpty,
                                 allowBlank: false
-                            },
+                            },{
+                                fieldLabel: '默认角色',
+                                name: 'roleDisplayName',
+                                bind:'{rec.roleDisplayName}',
+                                itemId:'roleDisplayName',
+                                readOnly:true,
+                                readOnlyCls:'x-item-disabled',
+                            }
                         ]
                     },
                     {
                         xtype: 'fieldset',
                         title: userRoleRes.selectRole,
                         checkboxToggle: false,
-                        defaults: {               // defaults are applied to items, not the container
-                            anchor: '50%'
-                        },
                         items:[
                             {
                                 xtype: 'multiselector',
                                 height: 300,
+                                width:400,
                                 fieldName: 'name',
                                 removeRowTip:'删除该行',
                                 viewConfig: {
                                     deferEmptyText: false,
                                     emptyText: '当前没有角色'
                                 },
+                                columns:[
+                                    {
+                                        xtype: 'checkcolumn',
+                                        text:'设为默认角色',
+                                        dataIndex:'isDefault',
+                                        flex:1,
+                                        listeners: {
+                                            checkchange: function (item, rowIndex, checked, eOpts) {
+                                                var store=this.up('grid').getStore();
+                                                var rec=store.getAt(rowIndex);
+                                                if(checked){
+                                                    me.down('#roleDisplayName').setValue(rec.get('displayName'));
+                                                    me.down('#roleId').setValue(rec.get('id'));
+                                                }
+                                                store.each(function(m){
+                                                    if(rec.get('id')!= m.get('id')){
+                                                        if(m.get('isDefault')!=null){
+                                                            m.set('isDefault',false);
+                                                        }
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    },
+                                    {
+                                        text:'角色名称',
+                                        flex:1,
+                                        dataIndex:'name'
+                                    },
+                                    {
+                                        text:'角色显示名称',
+                                        flex:1,
+                                        dataIndex:'displayName'
+                                    },
+                                    {
+                                        xtype:'actioncolumn',
+                                        width:50,
+                                        header: '操作',
+                                        items:[
+                                            {
+                                                iconCls:'user-delete',
+                                                tooltip:'删除',
+                                                handler:function(grid, rowIndex, colIndex,item,e,record){
+                                                    grid.getStore().remove(record);
+                                                }
+                                            }
+                                        ]
+                                    }
+
+                                ],
                                 title:'已分配角色',
                                 search: {
-                                    width: 300,
+                                    width: 200,
                                     height: 200,
                                     field: 'name',
                                     store:roleStore
@@ -200,26 +259,6 @@ Ext.define('App.view.user.UserForm', {
         ];
         this.callParent(arguments);
     },
-    onGridViewRefresh : function(store,selModel) {
-        var defaultRoleId = this.down('#defaultRoleId').getValue();
-
-        if(defaultRoleId){
-            var select =store.findBy(function(rec, id){
-                return id == defaultRoleId;
-            })
-            if(select != -1){
-                selModel.select(select);
-            }
-        }
-    },
-    onCheckedChange : function(records) {
-        if(records&&records.length>0){
-            this.down('#defaultRoleId').setValue(records[0].get('id'));
-        }else{
-            this.down('#defaultRoleId').setValue(null);
-        }
-    },
-
     getFormPanel: function () {
         return this.down('form');
     },
@@ -227,49 +266,19 @@ Ext.define('App.view.user.UserForm', {
     setActiveRecord: function (record) {
         this.activeRecord = record;
         if (record) {
-            this.setTitle(userRoleRes.editUser);
             this.down('#password').disable();
             this.down('#passwordAffirm').disable();
             this.down('#password').hide();
             this.down('#passwordAffirm').hide();
             this.getFormPanel().loadRecord(record);
         } else {
-            this.setTitle(userRoleRes.addUser);
             this.down('#password').show();
             this.down('#passwordAffirm').show();
             if(this.down('#password').isDisabled())
                 this.down('#password').enable();
             if(this.down('#passwordAffirm').isDisabled())
                 this.down('#passwordAffirm').enable();
-
             this.getFormPanel().getForm().reset();
         }
-    },
-
-    onSave: function () {
-        var me=this;
-        var active = this.activeRecord,form = this.getFormPanel().getForm(),
-            datas=form.getValues(),simpleRoles=datas.simpleRoles,roleids=[];
-        Ext.each(simpleRoles,function(data){
-            roleids.push(data.id);
-        })
-        if(roleids.length==0){
-            Ext.MessageBox.alert(globalRes.title.prompt, userRoleRes.msg.addUserHasRole);
-            return;
-        }
-        datas.roleIds= roleids.join(',');
-        if (form.isValid()) {
-            if (!active) {
-                // create new record
-                this.fireEvent('create', this, datas);
-            }
-            else {
-                this.fireEvent('update', this, form, active,roleids);
-            }
-        }
-    },
-
-    onCancel: function () {
-        this.close();
     }
 });

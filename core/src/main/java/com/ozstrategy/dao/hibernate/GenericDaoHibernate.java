@@ -2,6 +2,8 @@ package com.ozstrategy.dao.hibernate;
 
 import com.ozstrategy.dao.GenericDao;
 import com.ozstrategy.orm.HibernateTemplate;
+import com.ozstrategy.orm.QuerySearch;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
@@ -114,6 +116,33 @@ public class GenericDaoHibernate<T, PK extends Serializable> implements GenericD
 
     public void remove(T object) {
         hibernateTemplate.delete(object);
+    }
+
+    public List<T> listPage(Map<String, Object> params,Integer start, Integer limit) {
+        String hql="from "+persistentClass.getName()+" where 1=1 ";
+        return new QuerySearch(hql,params).addSort("createDate","DESC").pageQuery(getSession()).list();
+    }
+
+    public Integer count(Map<String, Object> params) {
+        String hql="select count(*) from "+persistentClass.getName()+" where 1=1 ";
+        Object o = new QuerySearch(hql,params).query(getSession()).uniqueResult();
+        return NumberUtils.createInteger(o.toString());
+    }
+
+    public List<T> listAll(Map<String, Object> params) {
+        String hql="from "+persistentClass.getName()+" where 1=1 ";
+        return new QuerySearch(hql,params).addSort("createDate","DESC").query(getSession()).list();
+    }
+
+    public T getByParams(Map<String, Object> params) {
+        params.put("start",0);
+        params.put("limit",1);
+        String hql="from "+persistentClass.getName()+" where 1=1 ";
+        List<T> list= new QuerySearch(hql,params).pageQuery(getSession()).list();
+        if(list!=null && list.size()>0){
+            return list.get(0);
+        }
+        return null;
     }
 
     @Autowired

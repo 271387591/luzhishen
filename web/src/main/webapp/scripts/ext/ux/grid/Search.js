@@ -135,7 +135,7 @@ Ext.define('Ext.ux.grid.Search', {
        * @cfg {Object} paramNames Params name map (defaults to {fields:'fields', query:'query'}
        */
       paramNames: {
-        fields: 'fields',
+        fields: [],
         query: 'query'
       },
       /**
@@ -217,9 +217,10 @@ Ext.define('Ext.ux.grid.Search', {
                     store.clearLocalFilter();
                   }
                   else if (me.searchMode == 'remote') {
-                    proxy.extraParams[me.paramNames.fields] = [];
-                    proxy.extraParams[me.paramNames.query] = '';
-
+                      var pFields=me.paramNames.fields;
+                      for(var i=0;i<pFields.length;i++){
+                          proxy.extraParams[pFields[i]] = '';
+                      }
                     store.loadPage(1, {
                       fromSearch: true
                     });
@@ -264,8 +265,12 @@ Ext.define('Ext.ux.grid.Search', {
                 else if (me.searchMode == 'remote') {
                     var extraParams=proxy.extraParams ||{};
                     proxy.extraParams=extraParams;
-                  proxy.extraParams[me.paramNames.fields] = me.listFields();
-                  proxy.extraParams[me.paramNames.query] = value;
+                    var pFields=me.paramNames.fields;
+                    for(var i=0;i<pFields.length;i++){
+                        proxy.extraParams[pFields[i]]=value;
+                    }
+                  //proxy.extraParams[me.paramNames.fields] = me.listFields();
+                  //proxy.extraParams[me.paramNames.query] = value;
                   store.loadPage(1);
                   store['hasSearch'] = true;
                 } else {

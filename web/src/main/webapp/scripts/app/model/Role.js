@@ -15,6 +15,7 @@ Ext.define('App.model.Role', {
         'systemViewId',
         'description',
         'text',
+        'isDefault',
         {
             name: 'createDate', convert: function (v) {
             return Ext.util.Format.date(new Date(v), 'Y-m-d H:i:s');

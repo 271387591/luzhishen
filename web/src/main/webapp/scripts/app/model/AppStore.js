@@ -1,0 +1,20 @@
+/**
+ * Created by lihao on 1/6/15.
+ */
+Ext.define('App.model.AppStore', {
+    extend: 'Ext.data.Model',
+    fields: [
+        'id',
+        'url',
+        'version',
+        'description',
+        'platform',
+        'currentVersion',
+        {
+            name: 'createDate',
+            convert: function (v) {
+                return Ext.util.Format.date(new Date(v), 'Y-m-d H:i:s');
+            }
+        }
+    ]
+});
