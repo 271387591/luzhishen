@@ -2,7 +2,7 @@
  * Created by lihao1 on 5/23/15.
  */
 Ext.define('App.view.user.UserForm', {
-    extend: 'Ext.ux.window.AnimWindow',
+    extend: 'Lzs.ux.window.AnimWindow',
     alias: 'widget.userForm',
     requires: [
     ],
@@ -79,24 +79,6 @@ Ext.define('App.view.user.UserForm', {
                                 allowBlank: false
                             },
                             {
-                                fieldLabel: '<font color="red">*</font>'+userRoleRes.header.firstName,
-                                name: 'firstName',
-                                maxLength: 20,
-                                minLength: 1,
-                                bind:'{rec.firstName}',
-                                blankText:globalRes.tooltip.notEmpty,
-                                allowBlank: false
-                            },
-                            {
-                                fieldLabel: '<font color="red">*</font>'+userRoleRes.header.lastName,
-                                name: 'lastName',
-                                maxLength: 20,
-                                minLength: 1,
-                                bind:'{rec.lastName}',
-                                blankText:globalRes.tooltip.notEmpty,
-                                allowBlank: false
-                            },
-                            {
                                 fieldLabel: '<font color="red">*</font>'+userRoleRes.header.password,
                                 name: 'password',
                                 itemId:'password',
@@ -129,7 +111,7 @@ Ext.define('App.view.user.UserForm', {
                                 },
                                 allowBlank: false
                             },{
-                                fieldLabel:'<font color="red">*</font>'+userRoleRes.header.gender,
+                                fieldLabel:userRoleRes.header.gender,
                                 xtype:'combo',
                                 name:'gender',
                                 editable:false,
@@ -150,25 +132,28 @@ Ext.define('App.view.user.UserForm', {
                                     ]
                                 })
                             },{
-                                fieldLabel: '<font color="red">*</font>'+userRoleRes.header.mobile,
+                                fieldLabel: userRoleRes.header.mobile,
                                 name: 'mobile',
                                 bind:'{rec.mobile}',
-                                blankText:globalRes.tooltip.notEmpty,
                                 validator:function(v){
-                                    if(!(/^1[3|4|5|8][0-9]\d{8}$/.test(v))){
-                                        return false;
+                                    if(v){
+                                        if(!(/^1[3|4|5|8][0-9]\d{8}$/.test(v))){
+                                            return false;
+                                        }
                                     }
                                     return true;
-                                },
-                                allowBlank: false
+                                }
                             },{
-                                fieldLabel: '<font color="red">*</font>'+userRoleRes.header.email,
+                                fieldLabel: userRoleRes.header.email,
                                 name: 'email',
                                 vtype: 'email',
-                                bind:'{rec.email}',
-                                blankText:globalRes.tooltip.notEmpty,
-                                allowBlank: false
+                                bind:'{rec.email}'
                             },{
+                                fieldLabel: '介绍人',
+                                name: 'referee',
+                                bind:'{rec.referee}'
+                            },{
+                                hidden:true,
                                 fieldLabel: '默认角色',
                                 name: 'roleDisplayName',
                                 bind:'{rec.roleDisplayName}',
@@ -180,6 +165,7 @@ Ext.define('App.view.user.UserForm', {
                     },
                     {
                         xtype: 'fieldset',
+                        hidden:true,
                         title: userRoleRes.selectRole,
                         checkboxToggle: false,
                         items:[

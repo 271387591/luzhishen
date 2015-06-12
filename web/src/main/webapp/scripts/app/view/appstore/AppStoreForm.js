@@ -2,7 +2,7 @@
  * Created by lihao on 1/6/15.
  */
 Ext.define('App.view.appstore.AppStoreForm', {
-    extend: 'Ext.ux.window.AnimWindow',
+    extend: 'Lzs.ux.window.AnimWindow',
     alias: 'widget.appStoreForm',
     controller: 'appStoreController',
     viewModel: {

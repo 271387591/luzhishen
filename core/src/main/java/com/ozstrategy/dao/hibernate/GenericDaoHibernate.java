@@ -14,11 +14,7 @@ import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository("genericDao")
 public class GenericDaoHibernate<T, PK extends Serializable> implements GenericDao<T, PK> {
@@ -118,8 +114,26 @@ public class GenericDaoHibernate<T, PK extends Serializable> implements GenericD
         hibernateTemplate.delete(object);
     }
 
+    public List<T> listSortPage(Map<String, Object> params, Integer start, Integer limit, Map<String, String> sort) {
+        String hql="from "+persistentClass.getName()+" where 1=1 ";
+        params.put("start",start);
+        params.put("limit",limit);
+        QuerySearch querySearch=new QuerySearch(hql,params);
+        if(!sort.isEmpty()){
+            for(Iterator<Map.Entry<String,String>> it=sort.entrySet().iterator();it.hasNext();){
+                Map.Entry<String,String> entry=it.next();
+                String key=entry.getKey();
+                String value=entry.getValue();
+                querySearch.addSort(key,value);
+            }
+        }
+        return querySearch.pageQuery(getSession()).list();
+    }
+
     public List<T> listPage(Map<String, Object> params,Integer start, Integer limit) {
         String hql="from "+persistentClass.getName()+" where 1=1 ";
+        params.put("start",start);
+        params.put("limit",limit);
         return new QuerySearch(hql,params).addSort("createDate","DESC").pageQuery(getSession()).list();
     }
 

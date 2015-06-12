@@ -60,25 +60,8 @@ public class UserSecurityAdvice implements MethodBeforeAdvice, AfterReturningAdv
    */
   @Override public void afterReturning(Object returnValue, Method method, Object[] args, Object target)
     throws Throwable {
-    User user = (User) args[0];
 
-    if (user.getVersion() != null) {
-      // reset the authentication object if current user
-      Authentication              auth     = SecurityContextHolder.getContext().getAuthentication();
-      AuthenticationTrustResolver resolver = new AuthenticationTrustResolverImpl();
 
-      // allow new users to signup - this is OK b/c Signup doesn't allow setting of roles
-      boolean signupUser = resolver.isAnonymous(auth);
-
-      if ((auth != null) && !signupUser) {
-        User currentUser = getCurrentUser(auth);
-
-        if (currentUser.getId().equals(user.getId())) {
-          auth = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
-          SecurityContextHolder.getContext().setAuthentication(auth);
-        }
-      }
-    }
   }
 
   //~ ------------------------------------------------------------------------------------------------------------------

@@ -4,6 +4,7 @@ import com.ozstrategy.model.userrole.Feature;
 import com.ozstrategy.model.userrole.Role;
 import com.ozstrategy.model.userrole.User;
 
+import javax.persistence.Column;
 import java.util.*;
 
 
@@ -11,8 +12,6 @@ public class UserCommand {
     private boolean accountLocked;
     private Date createDate;
     private boolean enabled;
-    private String firstName;
-    private String lastName;
     private Long id;
     private String password;
     private String roleDisplayName;
@@ -20,17 +19,15 @@ public class UserCommand {
     private List<Long> roleIds = new ArrayList<Long>();
     private String roleName;
     private List<SimpleRoleCommand> simpleRoles = new ArrayList<SimpleRoleCommand>();
-
-
     private String username;
-
     private Boolean admin = false;
     private Set<String> features = new LinkedHashSet<String>();
-
-    private String fullName;
     private String email;
     private String mobile;
     private String gender;
+    private String referee;
+    private String hotPass;
+
 
     public UserCommand() {
     }
@@ -38,16 +35,15 @@ public class UserCommand {
     public UserCommand(User user) {
         this.id = user.getId();
         this.username = user.getUsername();
-        this.firstName = user.getFirstName();
-        this.lastName = user.getLastName();
         this.enabled = user.isEnabled();
         this.createDate = user.getCreateDate();
         this.accountLocked = user.getAccountLocked();
         this.admin = user.isAdmin();
-        this.fullName = user.getFullName();
         this.email = user.getEmail();
         this.mobile = user.getMobile();
         this.gender = user.getGender();
+        this.referee=user.getReferee();
+        this.hotPass=user.getHotPass();
         Role defRole=user.getRole();
         if(defRole!=null){
             this.roleId=defRole.getId();
@@ -74,15 +70,6 @@ public class UserCommand {
         }
     }
 
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public boolean isAccountLocked() {
         return accountLocked;
     }
@@ -105,14 +92,6 @@ public class UserCommand {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     public Long getId() {
@@ -195,15 +174,6 @@ public class UserCommand {
         this.features = features;
     }
 
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -228,4 +198,19 @@ public class UserCommand {
         this.gender = gender;
     }
 
-} 
+    public String getReferee() {
+        return referee;
+    }
+
+    public void setReferee(String referee) {
+        this.referee = referee;
+    }
+
+    public String getHotPass() {
+        return hotPass;
+    }
+
+    public void setHotPass(String hotPass) {
+        this.hotPass = hotPass;
+    }
+}

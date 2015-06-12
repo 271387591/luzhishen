@@ -8,7 +8,7 @@ Ext.define('App.view.user.RoleList', {
     requires: [
         'App.view.user.RoleModel',
         'App.view.user.RoleController',
-        'Ext.ux.grid.Search',
+        'Lzs.ux.grid.Search',
         'App.view.user.RoleForm'
 
     ],

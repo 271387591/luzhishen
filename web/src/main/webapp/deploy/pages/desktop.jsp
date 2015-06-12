@@ -19,28 +19,34 @@
     <script type="text/javascript" src="<c:url value='/scripts/ext/ext-all.js'/>"></script>
     <script type="text/javascript" src="<c:url value="/jscripts/desktopRes.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/jscripts/jscriptRes.js"/>"></script>
-    <%--<script type="text/javascript" src="<c:url value='/scripts/ext/locale/ext-lang-${language}.js'/>"></script>--%>
-    <script type="text/javascript" src='<c:url value="/scripts/app/global.js"/>'></script>
+    <script type="text/javascript" src="<c:url value='/scripts/ext/packages/ext-charts/build/ext-charts.js'/>"></script>
+    <script type="text/javascript" src="<c:url value='/scripts/ext/packages/ext-locale/build/ext-locale-zh_CN.js'/>"></script>
+
     <c:set var="language"><%=language %></c:set>
-   <script type="text/javascript" src='<c:url value="/demo/demo.js"/>'></script>
 
 
+    <script type="text/javascript">
+        var basePath='<c:url value="/"/>';
+        Ext.Loader.setConfig({
+                    enabled: true,
+                    disableCaching: true
+                }
+        );
+        Ext.Loader.setPath({
+            'Lzs.ux': '<c:url value="/scripts/ux/app"/>',
+            'App': '<c:url value="/demo"/>'
+        });
+
+    </script>
+    <script type="text/javascript" src='<c:url value="/scripts/global.js"/>'></script>
 </head>
 <body>
 <div id="loading" class="loading">
     <div class="ozMiddleIcon"></div>
 </div>
 <div id="tmpForm"></div>
+<script type="text/javascript" src='<c:url value="/demo/demo.js"/>'></script>
 <script type="text/javascript">
-    Ext.Loader.setConfig({
-                enabled: true,
-                disableCaching: true
-            }
-    );
-    Ext.Loader.setPath({
-        'Ext.ux': '<c:url value="/demo"/>',
-        'App': '<c:url value="/demo"/>'
-    });
     Ext.require([
         'App.Application'
     ]);

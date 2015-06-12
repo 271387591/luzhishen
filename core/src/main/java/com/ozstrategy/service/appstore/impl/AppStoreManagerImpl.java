@@ -19,7 +19,7 @@ public class AppStoreManagerImpl extends GenericManagerImpl<AppStore,Long> imple
     private AppStoreDao appStoreDao;
     public AppStore getCurrent(String platform) {
         Map<String,Object> map=new HashMap<String, Object>();
-        map.put("Q_platform_EQ",platform);
+        map.put("Q_platform_EQ_S",platform);
         return appStoreDao.getByParams(map);
     }
 }

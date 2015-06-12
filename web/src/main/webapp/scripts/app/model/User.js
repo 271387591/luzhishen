@@ -3,18 +3,12 @@ Ext.define('App.model.User', {
     fields: [
         'id',
         'roleId',
-        'unitId',
-        'unitName',
         'username',
         'roleName',
         'roleDisplayName',
-        'firstName',
-        'lastName',
         'password',
-        'passwordAffirm',
         'mobile',
         'email',
-        'fullName',
         'defaultRoleName',
         'defaultRoleDisplayName',
         'defaultRoleId',
@@ -26,6 +20,7 @@ Ext.define('App.model.User', {
         },
         'enabled',
         'accountLocked',
+        'referee',
         'simpleRoles'
     ]
 });

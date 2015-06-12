@@ -4,6 +4,7 @@ package com.ozstrategy.webapp.security;
 import com.ozstrategy.Constants;
 import com.ozstrategy.webapp.command.BaseResultCommand;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
@@ -11,6 +12,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by lihao on 7/1/14.
@@ -30,14 +33,11 @@ public class WebAuthenticationFailLoggerHandler extends WebAuthenticationLoggerH
             response.getWriter().print(objectMapper.writeValueAsString(command));
             return;
         }
-        String msg = exception.getMessage();
-        if(StringUtils.equals(msg, Constants.USER_NOT_Authentication)){
-            BaseResultCommand command=new BaseResultCommand("用户未认证",false);
-            response.getWriter().print(objectMapper.writeValueAsString(command));
-            return;
-        }
-        BaseResultCommand command=new BaseResultCommand("无效用户名或密码，请重试。",false);
-        response.getWriter().print(objectMapper.writeValueAsString(command));
+        Map<String,Object> map=new HashMap<String, Object>();
+        map.put("result",0);
+        map.put("result_text","");
+        String result=objectMapper.writeValueAsString(map);
+        response.getWriter().print(result);
         return;
         
     }

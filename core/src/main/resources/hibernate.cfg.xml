@@ -6,9 +6,21 @@
 
 <hibernate-configuration>
     <session-factory>
+        <mapping class="com.ozstrategy.model.system.ApplicationConfig"/>
         <mapping class="com.ozstrategy.model.userrole.Feature"/>
         <mapping class="com.ozstrategy.model.userrole.User"/>
         <mapping class="com.ozstrategy.model.userrole.Role"/>
         <mapping class="com.ozstrategy.model.appstore.AppStore"/>
+        <mapping class="com.ozstrategy.model.credits.UserCredits"/>
+        <mapping class="com.ozstrategy.model.credits.CreditsDetail"/>
+        <mapping class="com.ozstrategy.model.comments.Comments"/>
+        <mapping class="com.ozstrategy.model.aps.Aps"/>
+        <mapping class="com.ozstrategy.model.order.CreditsBill"/>
+        <mapping class="com.ozstrategy.model.order.CreditsOrder"/>
+        <mapping class="com.ozstrategy.model.money.UserMoney"/>
+        <mapping class="com.ozstrategy.model.money.UserMoneyDetail"/>
+        <mapping class="com.ozstrategy.model.money.UserApply"/>
+        <mapping class="com.ozstrategy.model.money.SystemRmb"/>
+        <mapping class="com.ozstrategy.model.money.UserAliInfo"/>
     </session-factory>
 </hibernate-configuration>

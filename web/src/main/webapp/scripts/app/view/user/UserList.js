@@ -7,7 +7,7 @@ Ext.define('App.view.user.UserList', {
     requires: [
         'App.view.user.UserModel',
         'App.view.user.UserController',
-        'Ext.ux.grid.Search',
+        'Lzs.ux.grid.Search',
         'App.view.user.UserForm'
 
     ],
@@ -48,7 +48,7 @@ Ext.define('App.view.user.UserList', {
         ftype: 'search',
         disableIndexes: ['username', 'fullName'],
         paramNames: {
-            fields: ['Q_username_LK_OR','Q_firstName_LK_OR','Q_lastName_LK_OR'],
+            fields: ['Q_username_LK_OR_S'],
             query: 'keyword'
         },
         searchMode: 'remote'
@@ -65,16 +65,17 @@ Ext.define('App.view.user.UserList', {
     }],
     columns: [
         {
-            header: userRoleRes.header.fullName,
-            dataIndex: 'fullName'
-        },
-        {
             header: userRoleRes.header.username,
             dataIndex: 'username'
         },
         {
-            header: userRoleRes.header.defaultRoleName,
-            dataIndex: 'roleDisplayName'
+            header: '手机号',
+            dataIndex: 'mobile'
+        },
+
+        {
+            header: '电子邮件',
+            dataIndex: 'email'
         },
         {
             header:userRoleRes.header.accountLocked,
@@ -84,8 +85,12 @@ Ext.define('App.view.user.UserList', {
             }
         },
         {
-            header: globalRes.header.createDate,
+            header: '注册时间',
             dataIndex: 'createDate'
+        },
+        {
+            header: '介绍人',
+            dataIndex: 'referee'
         },
         {
             xtype:'actioncolumn',

@@ -5,6 +5,7 @@ import com.ozstrategy.service.userrole.FeatureManager;
 import com.ozstrategy.webapp.command.JsonReaderSingleResponse;
 import com.ozstrategy.webapp.command.login.LoginCommand;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -13,6 +14,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -23,9 +27,7 @@ import java.util.UUID;
  * To change this template use File | Settings | File Templates.
  */
 public class WebAuthenticationSuccessLoggerHandler extends WebAuthenticationLoggerHandler implements AuthenticationSuccessHandler {
-    @Autowired
-    private FeatureManager featureManager = null;
-    
+
   public void onAuthenticationSuccess(HttpServletRequest request,
                                       HttpServletResponse response, Authentication authentication)
     throws IOException, ServletException {
@@ -42,15 +44,20 @@ public class WebAuthenticationSuccessLoggerHandler extends WebAuthenticationLogg
       if (user == null) {
         return;
       }
-      String sessionId= UUID.randomUUID().toString();
-      AppSessionManager.put(user.getUsername(),sessionId);
-      
-      LoginCommand command = new LoginCommand(user);
-      command.setSessionId(sessionId);
-//      List<Feature> roleFeatures = featureManager.getUserFeaturesByUsername(request.getRemoteUser());
-//      command = command.populateFeatures(roleFeatures);
-      JsonReaderSingleResponse<LoginCommand> jsonReaderSingleResponse=new JsonReaderSingleResponse<LoginCommand>(command);
-      String result=objectMapper.writeValueAsString(jsonReaderSingleResponse);
+      Map<String,Object> map=new HashMap<String, Object>();
+      map.put("result",1);
+      map.put("result_text","");
+      Map<String,Object> data=new HashMap<String, Object>();
+      data.put("user_id",user.getId());
+      data.put("email",user.getEmail());
+      data.put("username",user.getUsername());
+      data.put("phone",user.getMobile());
+      data.put("reg_date", DateFormatUtils.format(user.getCreateDate(),"yyyy-MM-dd HH:mm:ss:"));
+      data.put("address",user.getAddress());
+      data.put("credits",user.getUserCredits().getTotal());
+      data.put("money",user.getUserMoney().getTotal());
+      map.put("data",data);
+      String result=objectMapper.writeValueAsString(map);
       response.getWriter().print(result);
   }
 }

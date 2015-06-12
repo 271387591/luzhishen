@@ -147,15 +147,23 @@ public class QuerySearch {
             return;
         }
         String as[] = property.split("[_]");
-        /*Q_title_LK*/
-        /*Q_u.title_LK*/
-        if (as != null && as.length == 3) {
+        /*Q_title_LK_L*/
+        /*Q_u.title_LK_L*/
+        if (as != null && as.length == 4) {
             String alias=property.replaceAll("\\.", "_");
+            if(namedMap.containsKey(alias)){
+                alias=alias+"_1";
+            }
+            value=convertObject(as[3],value.toString());
             namedMap.put(alias,value);
             QueryField queryField = new QueryField(alias, as[1], as[2]);
             commands.add(queryField);
-        }else if(as != null && as.length == 4){
+        }else if(as != null && as.length == 5){/*Q_title_LK_OR_L*/
             String alias=property.replaceAll("\\.", "_");
+            if(namedMap.containsKey(alias)){
+                alias=alias+"_1";
+            }
+            value=convertObject(as[4],value.toString());
             namedMap.put(alias,value);
             QueryField queryField = new QueryField(alias, as[1], as[2]);
             orCommands.add(queryField);
@@ -178,8 +186,10 @@ public class QuerySearch {
                 obj = new Float(s1);
             else if ("SN".equals(s))
                 obj = new Short(s1);
-            else if ("BT".equals(s1))
+            else if ("BT".equals(s))
                 obj=new Byte(s1);
+            else if ("DB".equals(s))
+                obj=new Double(s1);
             else if ("BL".equals(s))
                 obj= new Boolean(s1);
             else if ("D".equals(s))

@@ -8,9 +8,14 @@ Ext.define('App.main.TabCenter', {
         'App.main.MainModel',
         'App.main.MainController',
         'App.main.MainHeader',
-        'Ext.ux.window.AnimWindow',
+        'Lzs.ux.window.AnimWindow',
         'App.view.user.UserCenter',
-        'App.view.appstore.AppStore'
+        'App.view.appstore.AppStore',
+        'App.view.credits.UserCredits',
+        'App.view.order.OrderList',
+        'App.view.order.OrderChart',
+        'App.view.money.UserMoney',
+        'App.view.money.UserApply'
     ],
     controller: 'main',
     viewModel: {
@@ -56,45 +61,33 @@ Ext.define('App.main.TabCenter', {
         }
     },
     items: [
-        {
+    {
+        xtype: 'userApply',
+        title: '提现管理',
+        iconCls: 'exec-quarterly-icon'
+    },{
+        xtype: 'userMoney',
+        title: '平台金管理',
+        iconCls: 'exec-quarterly-icon'
+    },{
         xtype: 'panel',
-        title: '首页',
+        title: '订单查询',
+        iconCls: 'exec-quarterly-icon',
+            layout:'border',
             items:[
                 {
-                    xtype:'button',
-                    text:'sddf',
-                    handler:function(btn){
-                        var awin=Ext.create('Ext.ux.window.AnimWindow',{
-                            width:1100,
-                            height:this.up('panel').getHeight()
-                        });
-                        awin.animShow();
-                    }
+                    xtype:'orderList',
+                    region:'center'
                 },
                 {
-                    xtype:'textfield'
-                },
-                {
-                    xtype:'textfield'
-                },
-                {
-                    xtype:'textfield'
-                },
-                {
-                    xtype:'textfield',
-                    allowBlank: false
-                },
-
-
+                    xtype:'orderChart',
+                    region:'west'
+                }
             ]
+
     },{
-        xtype: 'panel',
-        title: 'Performance',
-        iconCls: 'exec-quarterly-icon',
-        html:'sdf111'
-    },{
-        xtype: 'panel',
-        title: 'Profit & Loss',
+        xtype: 'userCredits',
+        title: '积分管理',
         iconCls: 'exec-pl-icon'
     },{
         xtype: 'userCenter',

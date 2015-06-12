@@ -15,17 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-public class SimpleMVController implements InitializingBean {
+public class SimpleMVController {
 
     private final transient Log log = LogFactory.getLog(this.getClass());
 
     @Autowired
     private UserManager userManager = null;
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
-    }
-
 
     @RequestMapping("/dispatcherPage.action")
     public ModelAndView dispatcherPage(HttpServletRequest request, HttpServletResponse response) {

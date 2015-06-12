@@ -8,6 +8,102 @@
         <to type="redirect" last="true">login</to>
     </rule>
     <rule>
+        <from>/app/register</from>
+        <to>/service/user/mobileSave</to>
+    </rule>
+    <rule>
+        <from>/app/editUser</from>
+        <to>/service/user/mobileUpdate</to>
+    </rule>
+    <rule>
+        <from>/app/login</from>
+        <to>/j_security_check</to>
+    </rule>
+    <rule>
+        <from>/app/comments</from>
+        <to>/service/comments/save</to>
+    </rule>
+    <rule>
+        <from>/app/getUserCredits</from>
+        <to>/service/credits/getUserCredits</to>
+    </rule>
+    <rule>
+        <from>/app/listBills</from>
+        <to>/service/order/listBills</to>
+    </rule>
+    <rule>
+        <from>/app/createBills</from>
+        <to>/service/order/createBills</to>
+    </rule>
+    <rule>
+        <from>/app/cancelBills</from>
+        <to>/service/order/cancelBills</to>
+    </rule>
+
+    <rule>
+        <from>/app/createOrder</from>
+        <to>/service/order/createOrder</to>
+    </rule>
+    <rule>
+        <from>/app/getOrders</from>
+        <to>/service/order/getOrders</to>
+    </rule>
+    <rule>
+        <from>/app/getCredits</from>
+        <to>/service/order/getCredits</to>
+    </rule>
+
+
+    <rule>
+        <from>/app/mobileNotice</from>
+        <to>/service/order/createOrder</to>
+    </rule>
+    <rule>
+        <from>/app/getMoney</from>
+        <to>/service/money/getMoney</to>
+    </rule>
+    <rule>
+        <from>/app/applyRmb</from>
+        <to>/service/apply/applyRmb</to>
+    </rule>
+    <rule>
+        <from>/app/listHistoryEmail</from>
+        <to>/service/apply/listAliEmail</to>
+    </rule>
+    <rule>
+        <from>/app/setAp</from>
+        <to>/service/aps/setAp</to>
+    </rule>
+    <rule>
+        <from>/app/getAp</from>
+        <to>/service/aps/getAp</to>
+    </rule>
+    <rule>
+        <from>/app/reportPoints</from>
+        <to>/service/credits/reportPoints</to>
+    </rule>
+    <rule>
+        <from>/app/givePoints</from>
+        <to>/service/credits/givePoints</to>
+    </rule>
+
+
+    <rule>
+        <from>/alipay/bachnotice</from>
+        <to>/service/bachnotice</to>
+    </rule>
+    <rule>
+        <from>/alipay/mobilenotice</from>
+        <to>/service/mobilenotice</to>
+    </rule>
+    <rule>
+        <from>/alipay/pay</from>
+        <to>/service/apply/bathPay</to>
+    </rule>
+
+
+
+    <rule>
         <from>/j_security_check</from>
         <to>/j_security_check</to>
     </rule>

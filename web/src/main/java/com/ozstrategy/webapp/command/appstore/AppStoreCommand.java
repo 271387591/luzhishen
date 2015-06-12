@@ -1,7 +1,6 @@
 package com.ozstrategy.webapp.command.appstore;
 
 import com.ozstrategy.model.appstore.AppStore;
-import com.ozstrategy.webapp.command.BaseEntityCommand;
 
 import java.util.Date;
 
@@ -22,7 +21,6 @@ public class AppStoreCommand {
     }
 
     public AppStoreCommand(AppStore appStore) {
-//        super(appStore);
         this.id= appStore.getId();
         this.url= appStore.getUrl();
         this.version= appStore.getVersion();
@@ -81,23 +79,20 @@ public class AppStoreCommand {
         this.currentVersion = currentVersion;
     }
 
-    @Override
     public Date getCreateDate() {
         return createDate;
     }
 
-    @Override
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
-    @Override
     public Date getLastUpdateDate() {
         return lastUpdateDate;
     }
 
-    @Override
     public void setLastUpdateDate(Date lastUpdateDate) {
         this.lastUpdateDate = lastUpdateDate;
     }
+
 }

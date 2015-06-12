@@ -1,122 +1,60 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
-    <table name="Feature">
+    <table name="ApplicationConfig">
         <column>id</column>
-        <column>createDate</column>
-        <column>lastUpdateDate</column>
-        <column>parentId</column>
-        <column>description</column>
-        <column>displayName</column>
-        <column>name</column>
+        <column>systemKey</column>
+        <column>systemValue</column>
         <row>
             <value>1</value>
-            <value><![CDATA[2013-01-27 11:27:03.0]]></value>
-            <value><![CDATA[2014-07-25 13:51:42.0]]></value>
-            <null/>
-            <value>用户模块</value>
-            <value>用户模块</value>
-            <value>userModule</value>
+            <value>publicKey</value>
+            <value>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC0B21R0OM04Kz1ZpmhUS+zrgZI4p8RTCnMO3hrIv0wMY+Bpho6ks7QKJ34NgxjPIq9FxwIrON5UJWADnYDM/Zu7XDmLqQGSWWIFsILZvySma7oH8JCpgx/EoEIE2Ic1pRyfFMyxfToqhLKF8iaFX6HLQRGnpmAvrq0zznhWIRP4wIDAQAB</value>
         </row>
         <row>
             <value>2</value>
-            <value><![CDATA[2013-01-27 11:27:03.0]]></value>
-            <value><![CDATA[2014-07-25 13:51:42.0]]></value>
-            <value>1</value>
-            <value>用户管理</value>
-            <value>用户管理</value>
-            <value>user</value>
+            <value>privateKey</value>
+            <value>MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBALQHbVHQ4zTgrPVmmaFRL7OuBkjinxFMKcw7eGsi/TAxj4GmGjqSztAonfg2DGM8ir0XHAis43lQlYAOdgMz9m7tcOYupAZJZYgWwgtm/JKZrugfwkKmDH8SgQgTYhzWlHJ8UzLF9OiqEsoXyJoVfoctBEaemYC+urTPOeFYhE/jAgMBAAECgYBi8vYWEv7ekGLgGr10GgBi/NJ9evm88yTCGSnNkRSiSYs70kT2TryXUsvIokRawurqlWoWJph8lFsnYEti5UubrqY2pL6hUBi1gfyiB1IT9trEdOW3oyNVkzH/qBuZcIr4j8jixhFVwBakxD7QfsKFZTeFnMzRrVXXnWpor2H32QJBANooclVtfuz/wSZNU9KioSUT822yUT+fSGup9iTdshaTQMQLd7WkiaUM3nlmZ+X/SMOR+22LJ+3qRUOf/92DOfcCQQDTQdHUz9UrgGGcPpchIejrphyPl55FXX6yyGjQSEuXkfoAws4f++nNKqvpopZE0y7dHOedF9MBMAgokLvARz51AkBBnDR2mM25fVmbqVnyWVLZkdx+O0jQN5lSN/V9NOegfnzV+RTxniB/cRVfsXrB4zsBBmB1m4pQtUpLgk0zU4oVAkEAkBRu4J6Se2XGrMI/Xph6++TBy+kTR6m5VIO8gHkeHRSxFj3GSSgNUCFPODvsEqqZZrJlAM4T2daBafE0K7IrVQJBAMbRuFgLwgGJH+RQOr8VpQPK2UKuYPwzRF/AaeZDRGfheuj0+oe6NAhw/B3h/jYQRIZpwgFSkj0Mvx9mteZBt0Q=</value>
         </row>
         <row>
             <value>3</value>
-            <value><![CDATA[2014-07-25 13:46:30.0]]></value>
-            <value><![CDATA[2014-07-25 13:46:30.0]]></value>
-            <value>2</value>
-            <value>添加用户</value>
-            <value>添加用户</value>
-            <value>addUser</value>
+            <value>billLoseTime</value>
+            <value>3</value>
         </row>
         <row>
             <value>4</value>
-            <value><![CDATA[2014-07-25 13:47:55.0]]></value>
-            <value><![CDATA[2014-07-25 13:47:55.0]]></value>
-            <value>2</value>
-            <value>修改用户</value>
-            <value>修改用户</value>
-            <value>updateUser</value>
+            <value>orderLoseTime</value>
+            <value>30</value>
         </row>
         <row>
             <value>5</value>
-            <value><![CDATA[2014-07-25 13:48:38.0]]></value>
-            <value><![CDATA[2014-07-25 13:48:38.0]]></value>
-            <value>2</value>
-            <value>修改用户密码</value>
-            <value>修改用户密码</value>
-            <value>updateUserPassword</value>
+            <value>pid</value>
+            <value>2088511992380004</value>
         </row>
         <row>
             <value>6</value>
-            <value><![CDATA[2014-07-25 13:49:06.0]]></value>
-            <value><![CDATA[2014-07-25 13:49:06.0]]></value>
-            <value>2</value>
-            <value>锁定用户</value>
-            <value>锁定用户</value>
-            <value>lockUser</value>
+            <value>notify_url</value>
+            <value>http://121.40.83.214:8080/luzhishen/alipay/mobilenotice</value>
         </row>
         <row>
             <value>7</value>
-            <value><![CDATA[2014-07-25 13:49:31.0]]></value>
-            <value><![CDATA[2014-07-25 13:49:31.0]]></value>
-            <value>2</value>
-            <value>解锁用户</value>
-            <value>解锁用户</value>
-            <value>unLockUser</value>
+            <value>secret</value>
+            <value>f0nupyvkgayupzexqrzos4vgxp6vphh6</value>
         </row>
         <row>
             <value>8</value>
-            <value><![CDATA[2014-07-25 13:49:31.0]]></value>
-            <value><![CDATA[2014-07-25 13:49:31.0]]></value>
-            <value>2</value>
-            <value>删除用户</value>
-            <value>删除用户</value>
-            <value>removeUser</value>
+            <value>seller_email</value>
+            <value>23555109@qq.com</value>
         </row>
         <row>
             <value>9</value>
-            <value><![CDATA[2013-01-27 11:27:03.0]]></value>
-            <value><![CDATA[2014-07-25 13:51:42.0]]></value>
-            <value>1</value>
-            <value>角色管理</value>
-            <value>角色管理</value>
-            <value>role</value>
+            <value>account_name</value>
+            <value>上海梧樾信息科技有限公司</value>
         </row>
-
         <row>
             <value>10</value>
-            <value><![CDATA[2013-01-27 11:27:03.0]]></value>
-            <value><![CDATA[2014-07-25 13:51:49.0]]></value>
-            <value>9</value>
-            <value>编辑角色</value>
-            <value>编辑角色</value>
-            <value>updateRole</value>
+            <value>batch_notify_url</value>
+            <value>http://121.40.83.214:8080/luzhishen/alipay/bachnotice</value>
         </row>
-        <row>
-            <value>11</value>
-            <value><![CDATA[2013-01-27 11:27:03.0]]></value>
-            <value><![CDATA[2014-07-25 13:52:04.0]]></value>
-            <value>9</value>
-            <value>删除角色</value>
-            <value>删除角色</value>
-            <value>deleteRole</value>
-        </row>
-        <row>
-            <value>12</value>
-            <value><![CDATA[2013-01-27 11:27:03.0]]></value>
-            <value><![CDATA[2014-07-25 13:52:04.0]]></value>
-            <value>9</value>
-            <value>添加角色</value>
-            <value>添加角色</value>
-            <value>addRole</value>
-        </row>
+
     </table>
     <table name="Role">
         <column>id</column>
@@ -145,51 +83,9 @@
             <value>Y</value>
         </row>
     </table>
-    <table name="RoleFeature">
-        <column>featureId</column>
-        <column>roleId</column>
-        <row>
-            <value>1</value>
-            <value>-1</value>
-        </row>
-        <row>
-            <value>2</value>
-            <value>-1</value>
-        </row>
-        <row>
-            <value>3</value>
-            <value>-1</value>
-        </row>
-        <row>
-            <value>4</value>
-            <value>-1</value>
-        </row>
-        <row>
-            <value>5</value>
-            <value>-1</value>
-        </row>
-        <row>
-            <value>6</value>
-            <value>-1</value>
-        </row>
-        <row>
-            <value>7</value>
-            <value>-1</value>
-        </row>
-        <row>
-            <value>8</value>
-            <value>-1</value>
-        </row>
-        <row>
-            <value>9</value>
-            <value>-1</value>
-        </row>
-        <row>
-            <value>10</value>
-            <value>-1</value>
-        </row>
-    </table>
-    
+
+
+
     <table name="User">
         <column>id</column>
         <column>createDate</column>
@@ -197,23 +93,13 @@
         <column>accountExpired</column>
         <column>accountLocked</column>
         <column>address</column>
-        <column>city</column>
-        <column>country</column>
-        <column>postalCode</column>
-        <column>province</column>
         <column>credentialsExpired</column>
         <column>email</column>
         <column>enabled</column>
-        <column>firstName</column>
         <column>gender</column>
-        <column>lastName</column>
         <column>mobile</column>
         <column>password</column>
-        <column>passwordHint</column>
-        <column>phoneNumber</column>
         <column>username</column>
-        <column>version</column>
-        <column>website</column>
         <column>roleId</column>
         <row>
             <value>1</value>
@@ -222,23 +108,13 @@
             <value>N</value>
             <value>N</value>
             <value>Denver</value>
-            <value>Denver</value>
-            <value>US</value>
-            <value>80210</value>
-            <value>CO</value>
             <value>N</value>
             <value>admin@ozstrategy.com</value>
             <value>Y</value>
-            <value>李</value>
             <value>M</value>
-            <value>浩admin</value>
             <value>18583910581</value>
             <value>536c0b339345616c1b33caf454454d8b8a190d6c</value>
-            <value/>
-            <value>110</value>
             <value>admin</value>
-            <value>1</value>
-            <value>http://www.cnblogs.com/hk-jiujiu</value>
             <value>-1</value>
         </row>
     </table>

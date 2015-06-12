@@ -62,6 +62,10 @@ public class GenericManagerImpl<T, PK extends Serializable> extends Observable i
         dao.saveOrUpdate(object);
     }
 
+    public List<T> listSortPage(Map<String, Object> params, Integer start, Integer limit, Map<String, String> sort) {
+        return dao.listSortPage(params, start, limit, sort);
+    }
+
     public List<T> listPage(Map<String, Object> params, Integer start, Integer limit) {
         return dao.listPage(params,start,limit);
     }
@@ -72,5 +76,9 @@ public class GenericManagerImpl<T, PK extends Serializable> extends Observable i
 
     public List<T> listAll(Map<String, Object> params) {
         return dao.listAll(params);
+    }
+
+    public T getByParams(Map<String, Object> params) {
+        return dao.getByParams(params);
     }
 } 

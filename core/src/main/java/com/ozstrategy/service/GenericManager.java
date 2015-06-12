@@ -23,7 +23,11 @@ public interface GenericManager<T, PK extends Serializable> {
 
     void saveOrUpdate(T object);
 
+    List<T> listSortPage(Map<String,Object> params,Integer start,Integer limit,Map<String,String> sort);
+
     List<T> listPage(Map<String,Object> params,Integer start,Integer limit);
     Integer count(Map<String,Object> params);
     List<T> listAll(Map<String,Object> params);
+
+    T getByParams(Map<String,Object> params);
 } 

@@ -608,10 +608,12 @@
         <jdbc.version>5.1.14</jdbc.version>
         <jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
         <jdbc.url>jdbc:mysql://127.0.0.1:3306/${db.name}?createDatabaseIfNotExist=true&amp;amp;useUnicode=true&amp;amp;characterEncoding=utf-8&amp;amp;autoReconnect=true</jdbc.url>
-        <!--<jdbc.url>jdbc:mysql://192.168.168.10/${db.name}?createDatabaseIfNotExist=true&amp;amp;useUnicode=true&amp;amp;characterEncoding=utf-8&amp;amp;autoReconnect=true</jdbc.url>-->
-        <!--<jdbc.url>jdbc:mysql://119.7.222.254/${db.name}?createDatabaseIfNotExist=true&amp;amp;useUnicode=true&amp;amp;characterEncoding=utf-8&amp;amp;autoReconnect=true</jdbc.url>-->
         <jdbc.username>root</jdbc.username>
         <jdbc.password>Passw0rd</jdbc.password>
+        <!--<jdbc.url>jdbc:mysql://121.40.83.214:3306/${db.name}?createDatabaseIfNotExist=true&amp;amp;useUnicode=true&amp;amp;characterEncoding=utf-8&amp;amp;autoReconnect=true</jdbc.url>-->
+        <!--<jdbc.username>hotap</jdbc.username>-->
+        <!--<jdbc.password>hotap123456</jdbc.password>-->
+
 
         <!-- Properties calculated by AppFuse when running full-source plugin -->
         <aspectj.version>1.6.10</aspectj.version>

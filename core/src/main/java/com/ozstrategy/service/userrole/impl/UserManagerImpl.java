@@ -1,6 +1,10 @@
 package com.ozstrategy.service.userrole.impl;
 
+import com.ozstrategy.dao.credits.UserCreditsDao;
+import com.ozstrategy.dao.money.UserMoneyDao;
 import com.ozstrategy.dao.userrole.UserDao;
+import com.ozstrategy.model.credits.UserCredits;
+import com.ozstrategy.model.money.UserMoney;
 import com.ozstrategy.model.userrole.User;
 import com.ozstrategy.service.GenericManagerImpl;
 import com.ozstrategy.service.userrole.UserManager;
@@ -10,6 +14,7 @@ import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,29 +26,39 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
 
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private UserCreditsDao userCreditsDao;
+    @Autowired
+    private UserMoneyDao userMoneyDao;
+
+
 
     public Boolean existByUserName(String username) {
         Map<String,Object> map=new HashMap<String, Object>();
-        map.put("Q_username_EQ",username);
+        map.put("Q_username_EQ_S",username);
+        map.put("Q_enabled_EQ_BL",true);
         User user = userDao.getByParams(map);
         return user != null;
     }
 
     public User getUserByUsername(String username) throws UsernameNotFoundException {
         Map<String,Object> map=new HashMap<String, Object>();
-        map.put("Q_username_EQ",username);
+        map.put("Q_username_EQ_S",username);
+        map.put("Q_enabled_EQ_BL",true);
         return userDao.getByParams(map);
     }
 
     public User getUserByEmail(String email) {
         Map<String,Object> map=new HashMap<String, Object>();
-        map.put("Q_email_EQ",email);
+        map.put("Q_email_EQ_S",email);
+        map.put("Q_enabled_EQ_BL",true);
         return userDao.getByParams(map);
     }
 
     public User getUserByMobile(String mobile) {
         Map<String,Object> map=new HashMap<String, Object>();
-        map.put("Q_mobile_EQ",mobile);
+        map.put("Q_mobile_EQ_S",mobile);
+        map.put("Q_enabled_EQ_BL",true);
         return userDao.getByParams(map);
     }
 
@@ -69,10 +84,22 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
     }
 
     public User saveUser(User user) {
+        boolean save=false;
         if (user.getId() == null) {
             user.setPassword(passwordEncoder.encodePassword(user.getPassword(), null));
+            save=true;
         }
         userDao.saveOrUpdate(user);
+        if(save){
+            UserCredits credits=new UserCredits();
+            credits.setUser(user);
+            credits.setCreateDate(new Date());
+            userCreditsDao.save(credits);
+            UserMoney money=new UserMoney();
+            money.setUser(user);
+            money.setCreateDate(new Date());
+            userMoneyDao.save(money);
+        }
         return user;
     }
 

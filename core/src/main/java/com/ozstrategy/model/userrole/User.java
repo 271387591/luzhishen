@@ -2,6 +2,8 @@ package com.ozstrategy.model.userrole;
 
 import com.ozstrategy.Constants;
 import com.ozstrategy.model.BaseEntity;
+import com.ozstrategy.model.credits.UserCredits;
+import com.ozstrategy.model.money.UserMoney;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.hibernate.annotations.Index;
@@ -9,19 +11,7 @@ import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -42,27 +32,15 @@ public class User extends BaseEntity implements UserDetails {
     @Column(columnDefinition = "char",length = 1)
     @Type(type = "yes_no")
     private Boolean  enabled=Boolean.TRUE;
-    @Embedded
-    private Address  address            = new Address();
+    @Column(columnDefinition = "TEXT")
+    private String address;
     @Column
     private String   email;
     @Column
-    private String   firstName;
-    @Column
-    private String   lastName;
-    @Column
     private String   password;
-    @Column
-    private String   passwordHint;
-    @Column
-    private String   phoneNumber;
     @Column(unique = true)
     @Index(columnNames = {"username"},name = "usernameIndex")
     private String   username;
-    @Column
-    private Integer   version;
-    @Column
-    private String   website;
     @Column
     private String   gender;
     @Column
@@ -74,12 +52,18 @@ public class User extends BaseEntity implements UserDetails {
     )
     @ManyToMany(fetch   = FetchType.LAZY)
     private Set<Role> roles              = new HashSet<Role>();
-    
-    @Transient
-    private String fullName;
     @ManyToOne
     @JoinColumn(name = "roleId")
     private Role role;
+    @Column
+    private String referee;
+    @Column
+    private String hotPass;
+    @OneToOne(mappedBy = "user")
+    private UserMoney userMoney;
+    @OneToOne(mappedBy = "user")
+    private UserCredits userCredits;
+
 
     public User() {
     }
@@ -132,12 +116,20 @@ public class User extends BaseEntity implements UserDetails {
         this.enabled = enabled;
     }
 
-    public Address getAddress() {
-        return address;
+    public String getReferee() {
+        return referee;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setReferee(String referee) {
+        this.referee = referee;
+    }
+
+    public String getHotPass() {
+        return hotPass;
+    }
+
+    public void setHotPass(String hotPass) {
+        this.hotPass = hotPass;
     }
 
     public String getEmail() {
@@ -148,22 +140,7 @@ public class User extends BaseEntity implements UserDetails {
         this.email = email;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-    @Transient 
+    @Transient
     public Set<GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authorities = new LinkedHashSet<GrantedAuthority>();
         authorities.addAll(roles);
@@ -177,22 +154,6 @@ public class User extends BaseEntity implements UserDetails {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getPasswordHint() {
-        return passwordHint;
-    }
-
-    public void setPasswordHint(String passwordHint) {
-        this.passwordHint = passwordHint;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public String getUsername() {
@@ -227,29 +188,10 @@ public class User extends BaseEntity implements UserDetails {
         return false;
     }
 
-    public String getFullName() {
-        return firstName+lastName;
-    }
-
     public void setUsername(String username) {
         this.username = username;
     }
 
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
-    public String getWebsite() {
-        return website;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
-    }
 
     public String getMobile() {
         return mobile;
@@ -281,6 +223,30 @@ public class User extends BaseEntity implements UserDetails {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public UserMoney getUserMoney() {
+        return userMoney;
+    }
+
+    public void setUserMoney(UserMoney userMoney) {
+        this.userMoney = userMoney;
+    }
+
+    public UserCredits getUserCredits() {
+        return userCredits;
+    }
+
+    public void setUserCredits(UserCredits userCredits) {
+        this.userCredits = userCredits;
     }
 
     @Override

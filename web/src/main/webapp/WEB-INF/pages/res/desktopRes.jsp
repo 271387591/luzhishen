@@ -2,9 +2,7 @@
 var globalRes = {
   logoutUrl: '<c:url value="/logout"/>',
   userName: '${command.username}',
-  userFullName: '${command.fullName}',
   userId: '${command.id}',
-  isAdmin : '${command.admin}',
   features: '${command.features}',
   title:{
     resetLocale: '<fmt:message key="globalRes.title.resetLocale" />',

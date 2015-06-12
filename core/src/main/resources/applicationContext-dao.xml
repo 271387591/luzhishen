@@ -38,5 +38,9 @@
 
     <!-- Activates scanning of @Repository -->
     <context:component-scan base-package="com.ozstrategy.dao"/>
+    <bean class="org.springframework.jdbc.core.JdbcTemplate" id="jdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
 
 </beans>

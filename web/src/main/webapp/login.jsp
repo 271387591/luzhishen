@@ -15,9 +15,9 @@
     <input type="hidden" value="PC" name="platform">
     <fieldset class="boxBody">
         <label>用户名</label>
-        <input type="text" name="username">
+        <input type="text" name="login_name">
         <label>密码</label>
-        <input type="password" name="password">
+        <input type="password" name="login_password">
     </fieldset>
     <footer>
         <c:if test="${param.error=='true'}">

@@ -35,8 +35,8 @@ public class UserController extends BaseController {
     @RequestMapping("listUsers")
     public JsonReaderResponse<UserCommand> listUsers(HttpServletRequest request) {
         Map<String,Object> map=requestMap(request);
-        map.put("Q_enabled_EQ",true);
-        map.put("Q_username_NEQ", Constants.Admin);
+        map.put("Q_enabled_EQ_BL",true);
+        map.put("Q_username_NEQ_S", Constants.Admin);
         List<User> users        = userManager.listPage(map,obtainStart(request), obtainLimit(request));
         List<UserCommand> userCommands = new ArrayList<UserCommand>();
         if ((users != null) && (users.size() > 0)) {
@@ -48,6 +48,62 @@ public class UserController extends BaseController {
         int count = userManager.count(map);
         return new JsonReaderResponse<UserCommand>(userCommands,count);
     }
+    @RequestMapping("mobileSave")
+    public Map<String,Object> mobileSave(HttpServletRequest request){
+        Map<String,Object> map=new HashMap<String, Object>();
+        String username=request.getParameter("username");
+        String password=request.getParameter("password");
+        String referee=request.getParameter("referee");
+        String email=request.getParameter("email");
+        String phone=request.getParameter("phone");
+        String address=request.getParameter("address");
+        if(userManager.existByUserName(username)){
+            map.put("result",0);
+            map.put("result_text","用户已存在");
+            return map;
+        }
+        User user=new User();
+        user.setCreateDate(new Date());
+        user.setLastUpdateDate(new Date());
+        user.setReferee(referee);
+        user.setPassword(password);
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setMobile(phone);
+        user.setAddress(address);
+        userManager.saveUser(user);
+        map.put("result",1);
+        map.put("result_text","");
+        return map;
+    }
+    @RequestMapping("mobileUpdate")
+    public Map<String,Object> mobileUpdate(HttpServletRequest request){
+        Map<String,Object> map=new HashMap<String, Object>();
+        String username=request.getRemoteUser();
+        if(StringUtils.isEmpty(username)){
+            map.put("result",0);
+            map.put("result_text","登录超时");
+            return map;
+        }
+        User user=userManager.getUserByUsername(username);
+        String password=request.getParameter("password");
+        String referee=request.getParameter("referee");
+        String email=request.getParameter("email");
+        String phone=request.getParameter("phone");
+        String address=request.getParameter("address");
+        user.setCreateDate(new Date());
+        user.setLastUpdateDate(new Date());
+        user.setReferee(referee);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setMobile(phone);
+        user.setAddress(address);
+        userManager.saveOrUpdate(user);
+        map.put("result",1);
+        map.put("result_text","");
+        return map;
+    }
+
     @RequestMapping("save")
     public BaseResultCommand save(@RequestBody UserCommand userCommand,HttpServletRequest request) {
         Long id=userCommand.getId();
@@ -63,12 +119,12 @@ public class UserController extends BaseController {
             user.setPassword(userCommand.getPassword());
         }
         user.setUsername(userCommand.getUsername());
-        user.setFirstName(userCommand.getFirstName());
-        user.setLastName(userCommand.getLastName());
         user.setLastUpdateDate(new Date());
         user.setEmail(userCommand.getEmail());
         user.setMobile(userCommand.getMobile());
         user.setGender(userCommand.getGender());
+        user.setReferee(userCommand.getReferee());
+        user.setHotPass(userCommand.getHotPass());
         Long roleId=userCommand.getRoleId();
         if(roleId!=null){
             Role defRole=roleManager.get(roleId);
@@ -86,7 +142,7 @@ public class UserController extends BaseController {
         }
         user.getRoles().clear();
         user.getRoles().addAll(roles);
-        userManager.saveOrUpdate(user);
+        userManager.saveUser(user);
         return new BaseResultCommand("",Boolean.TRUE);
     }
     @RequestMapping("remove/{id}")

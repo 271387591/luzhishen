@@ -2,7 +2,7 @@
  * Created by lihao1 on 5/23/15.
  */
 Ext.define('App.view.user.RoleForm', {
-    extend: 'Ext.ux.window.AnimWindow',
+    extend: 'Lzs.ux.window.AnimWindow',
     alias: 'widget.roleForm',
     requires: [
         'App.store.FeatureTree'

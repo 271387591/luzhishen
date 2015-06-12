@@ -19,6 +19,7 @@ Ext.define('App.view.user.UserCenter', {
         iconCls: 'exec-quarterly-icon'
     },{
         xtype: 'roleList',
+            hidden:true,
         title: '角色管理',
         iconCls: 'exec-pl-icon'
     }]

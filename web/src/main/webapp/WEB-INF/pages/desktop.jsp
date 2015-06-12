@@ -13,26 +13,31 @@
     <c:set var="language"><%=language %></c:set>
     <fmt:setLocale value="zh_CN" scope="session"/>
     <link rel="stylesheet" type="text/css" href="<c:url value='/scripts/ext/packages/ext-theme-crisp/build/resources/ext-theme-crisp-all.css'/>"/>
+    <%--<link rel="stylesheet" type="text/css" href="<c:url value='/scripts/ext/packages/sencha-charts/build/crisp/resources/sencha-charts-all.css'/>"/>--%>
     <link rel="stylesheet" type="text/css" href="<c:url value='/scripts/app/css/execDashboard-all.css'/>"/>
     <script type="text/javascript" src="<c:url value='/scripts/ext/ext-all.js'/>"></script>
+    <script type="text/javascript" src="<c:url value='/scripts/ext/packages/ext-charts/build/ext-charts.js'/>"></script>
+    <%--<script type="text/javascript" src="<c:url value='/scripts/ext/packages/sencha-charts/build/sencha-charts.js'/>"></script>--%>
     <script type="text/javascript" src="<c:url value="/jscripts/desktopRes.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/jscripts/jscriptRes.js"/>"></script>
     <script type="text/javascript" src="<c:url value='/scripts/ext/packages/ext-locale/build/ext-locale-zh_CN.js'/>"></script>
-    <script type="text/javascript" src='<c:url value="/scripts/app/global.js"/>'></script>
+
 
 
   <script type="text/javascript">
+      var basePath='<c:url value="/"/>';
     Ext.Loader.setConfig({
                 enabled: true,
                 disableCaching: true
             }
     );
     Ext.Loader.setPath({
-        'Ext.ux': '<c:url value="/scripts/ext/ux"/>',
+        'Lzs.ux': '<c:url value="/scripts/ux/app"/>',
         App: '<c:url value="/scripts/app"/>'
     });
 
   </script>
+    <script type="text/javascript" src='<c:url value="/scripts/global.js"/>'></script>
 
 </head>
 <body>
