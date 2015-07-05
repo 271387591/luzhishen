@@ -616,9 +616,9 @@
     border: 1px solid #f5f5f5
 }
 
-.x-panel-header-navigation .x-tool-img {
-    background-color: #f1495b
-}
+/*.x-panel-header-navigation .x-tool-img {*/
+    /*background-color: #f1495b*/
+/*}*/
 
 .x-panel-header-navigation-horizontal {
     padding: 0
@@ -691,7 +691,7 @@
 .x-panel-body-navigation {
     background: #ececec;
     border-color: #cecece;
-    color: #3e4752;
+    /*color: #3e4752;*/
     font-size: 15px;
     font-weight: 300;
     font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -938,14 +938,14 @@
     box-shadow: 0 0 4px 3px rgba(0, 0, 0, 0.35) !important
 }
 
-.exec-menu-navigation .x-tool-img {
-    background-color: transparent !important;
-    left: 44px;
-    width: 32px;
-    height: 32px;
-    position: relative;
-    top: 30px
-}
+/*.exec-menu-navigation .x-tool-img {*/
+    /*background-color: transparent !important;*/
+    /*left: 44px;*/
+    /*width: 32px;*/
+    /*height: 32px;*/
+    /*position: relative;*/
+    /*top: 30px*/
+/*}*/
 
 .exec-menu-navigation .x-tool-gear {
     background-image: url(icons/menu-disclosure.png) !important;

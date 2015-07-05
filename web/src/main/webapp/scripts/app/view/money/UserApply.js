@@ -39,12 +39,6 @@ Ext.define('App.view.money.UserApply', {
                 },
                 '->',
                 {
-                    fieldLabel:'批次号',
-                    labelWidth:65,
-                    xtype:'textfield',
-                    bind:'{rec.Q_batchNo_LK}'
-                },
-                {
                     fieldLabel:'用户账号',
                     labelWidth:65,
                     xtype:'textfield',
@@ -74,11 +68,6 @@ Ext.define('App.view.money.UserApply', {
                 displayInfo: true
             }],
             columns: [
-                {
-                    width:150,
-                    header: '批次号',
-                    dataIndex: 'batchNo'
-                },
                 {
                     width:150,
                     header: '流水号',

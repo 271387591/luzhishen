@@ -117,10 +117,6 @@ Ext.define('App.view.money.UserMoneyDetail', {
                             flex:1,
                             text:'提现数量',
                             dataIndex:'total'
-                        },{
-                            flex:1,
-                            text:'操作人',
-                            dataIndex:'lastUsername'
                         }
                     ]
                 },

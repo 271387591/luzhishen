@@ -34,11 +34,92 @@ Ext.define('App.main.MainHeader', {
                             scale: 'small',
                             menu: [
                                 {
-                                    text:'修改密码'
+                                    text:'修改密码',
+                                    handler:function(){
+                                        var win=Ext.widget('window',{
+                                            width:400,
+                                            autoHeight:200,
+                                            layout:'fit',
+                                            title:'修改密码',
+                                            modal:true,
+                                            buttons:[
+                                                {
+                                                    text:'确定',
+                                                    handler:function(){
+                                                        var pwd=win.down('form').getValues().password;
+                                                        ajaxPostRequest("user/adminChangePassword",{id:globalRes.userId,newPassword:pwd},function(result){
+                                                            if(result.success){
+                                                                Ext.Msg.alert('提示','修改成功')
+                                                            }else{
+                                                                Ext.Msg.alert('提示',result.message)
+                                                            }
+                                                        })
+
+                                                    }
+                                                },
+                                                {
+                                                    text:'取消',
+                                                    handler:function(){
+                                                        win.close();
+                                                    }
+                                                }
+                                            ],
+                                            items:[
+                                                {
+                                                    xtype:'form',
+                                                    padding:10,
+                                                    border:false,
+                                                    layout:'form',
+                                                    items:[
+                                                        {
+                                                            xtype:'textfield',
+                                                            fieldLabel: '<font color="red">*</font>新密码',
+                                                            name: 'password',
+                                                            itemId:'password',
+                                                            blankText:globalRes.tooltip.notEmpty,
+                                                            minLength: 6,
+                                                            minLengthText: userRoleRes.passwordError,
+                                                            maxLength: 16,
+                                                            maxLengthText: userRoleRes.passwordError,
+                                                            inputType:'password',
+                                                            allowBlank: false
+                                                        },{
+                                                            xtype:'textfield',
+                                                            fieldLabel: '<font color="red">*</font>'+userRoleRes.passwordAffirm,
+                                                            itemId:'passwordAffirm',
+                                                            name: 'passwordAffirm',
+                                                            blankText:globalRes.tooltip.notEmpty,
+                                                            minLength: 6,
+                                                            minLengthText: userRoleRes.passwordError,
+                                                            maxLength: 16,
+                                                            maxLengthText: userRoleRes.passwordError,
+                                                            inputType:'password',
+                                                            validator: function(v) {
+                                                                var newPass = win.down('#password');
+                                                                if (v == newPass.getValue()) {
+                                                                    return true;
+                                                                }
+                                                                else {
+                                                                    return userRoleRes.passwordHitNotAllow;
+                                                                }
+                                                            },
+                                                            allowBlank: false
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        });
+                                        win.show();
+
+                                    }
                                 },{
                                     text:'安全退出',
                                     handler:function(){
-                                        document.location.replace(globalRes.logoutUrl);
+                                        Ext.Msg.confirm('退出','你确定要退出么？',function(btn){
+                                            if(btn=='yes'){
+                                                document.location.replace(globalRes.logoutUrl);
+                                            }
+                                        })
                                     }
                                 }
                             ]

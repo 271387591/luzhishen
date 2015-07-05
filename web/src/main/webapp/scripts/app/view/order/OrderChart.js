@@ -2,9 +2,13 @@
  * Created by lihao1 on 5/29/15.
  */
 Ext.define('App.view.order.OrderChart', {
-    extend: 'Ext.Panel',
+    extend: 'Ext.panel.Panel',
     xtype: 'orderChart',
     width: 350,
+    //title:'订单分布图',
+    collapsible:true,
+    margin:'0 2 0 0',
+    //collapsedCls:'user-edit',
     initComponent: function() {
         var me = this;
         var store = Ext.create('Ext.data.JsonStore', {

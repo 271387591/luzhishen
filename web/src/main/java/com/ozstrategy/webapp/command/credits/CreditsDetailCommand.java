@@ -25,14 +25,17 @@ public class CreditsDetailCommand {
     private Double total;
     private String ssid;
     private String bssid;
+    private Double price;
     public CreditsDetailCommand() {
     }
     public CreditsDetailCommand(CreditsDetail detail) {
         this.id= detail.getId();
         this.type= detail.getType();
         User deal=detail.getDeal();
-        this.dealId= deal.getId();
-        this.dealName=deal.getUsername();
+        if(deal!=null){
+            this.dealId= deal.getId();
+            this.dealName=deal.getUsername();
+        }
         this.createDate=detail.getCreateDate();
         this.lastUpdateDate=detail.getLastUpdateDate();
         this.creditsId=detail.getCredits().getId();
@@ -41,6 +44,7 @@ public class CreditsDetailCommand {
         this.ssid= detail.getSsid();
         this.bssid= detail.getBssid();
         this.total=detail.getTotal();
+        this.price=detail.getPrice();
     }
 
     public Long getId() {
@@ -137,5 +141,13 @@ public class CreditsDetailCommand {
 
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

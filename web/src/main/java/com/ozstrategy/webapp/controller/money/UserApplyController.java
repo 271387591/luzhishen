@@ -72,6 +72,9 @@ public class UserApplyController extends BaseController {
                 userAliInfoManager.save(userAliInfo);
             }
             UserMoney userMoney=user.getUserMoney();
+            if(userMoney.getTotal()<=0){
+                return new JsonReaderSingleResponse<CreditsBillCommand>(null,false,"账户余额不足");
+            }
 
             UserApply userApply=new UserApply();
             userApply.setCreator(user);
@@ -115,6 +118,35 @@ public class UserApplyController extends BaseController {
         }
         return new JsonReaderResponse<UserAliInfoCommand>(null,false,"请求错误");
     }
+    @RequestMapping("getApply")
+    public JsonReaderResponse<UserApplyCommand> getApply(HttpServletRequest request) {
+        String username=request.getRemoteUser();
+        Integer status=parseInteger(obtain(request,"status"));
+        if(StringUtils.isEmpty(username)){
+            return new JsonReaderResponse<UserApplyCommand>(null,false,"登录超时");
+        }
+        try{
+            User user=userManager.getUserByUsername(username);
+            Map<String,Object> map=new HashMap<String, Object>();
+            map.put("Q_creator.id_EQ_L",user.getId());
+            map.put("Q_status_EQ_N",status);
+            List<UserApply> roles        = userApplyManager.listPage(map, obtainStart(request), obtainLimit(request));
+            List<UserApplyCommand> roleCommands = new ArrayList<UserApplyCommand>();
+            if ((roles != null) && (roles.size() > 0)) {
+                for (UserApply role : roles) {
+                    UserApplyCommand command=new UserApplyCommand(role);
+                    roleCommands.add(command);
+                }
+            }
+            Integer count = userApplyManager.count(map);
+            return new JsonReaderResponse<UserApplyCommand>(roleCommands, true,count,"");
+        }catch (Exception e){
+
+        }
+
+
+        return new JsonReaderResponse<UserApplyCommand>(null,false,"获取失败");
+    }
     @RequestMapping("listApply")
     public JsonReaderResponse<UserApplyCommand> listApply(HttpServletRequest request) {
         Map<String,Object> map=requestMap(request);
@@ -130,6 +162,7 @@ public class UserApplyController extends BaseController {
         Integer count = userApplyManager.count(map);
         return new JsonReaderResponse<UserApplyCommand>(roleCommands, true,count,"");
     }
+
     @RequestMapping("cancelApply")
     public JsonReaderSingleResponse cancelApply(HttpServletRequest request){
         String ids=request.getParameter("ids");

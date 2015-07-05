@@ -81,4 +81,10 @@ public class GenericManagerImpl<T, PK extends Serializable> extends Observable i
     public T getByParams(Map<String, Object> params) {
         return dao.getByParams(params);
     }
+
+    public void batchRemove(List<T> list) {
+        for(T o:list){
+            dao.remove(o);
+        }
+    }
 } 

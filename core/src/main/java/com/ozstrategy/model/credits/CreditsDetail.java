@@ -38,6 +38,8 @@ public class CreditsDetail extends CreatorEntity {
     @ManyToOne
     @JoinColumn(name = "creditsId")
     private UserCredits credits;
+    @Column
+    private Double price;
 
     public CreditsDetail() {
     }
@@ -112,6 +114,14 @@ public class CreditsDetail extends CreatorEntity {
 
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     @Override

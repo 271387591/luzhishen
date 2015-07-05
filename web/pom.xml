@@ -190,6 +190,7 @@
                                     <include>scripts/app/model/UserMoney.js</include>
                                     <include>scripts/app/model/UserMoneyDetail.js</include>
                                     <include>scripts/app/model/Order.js</include>
+                                    <include>scripts/app/model/Comments.js</include>
 
                                     <include>scripts/app/store/FeatureTree.js</include>
 
@@ -235,6 +236,12 @@
                                     <include>scripts/app/view/money/UserApplyModel.js</include>
                                     <include>scripts/app/view/money/UserApplyController.js</include>
                                     <include>scripts/app/view/money/UserApply.js</include>
+
+
+
+                                    <include>scripts/app/view/comments/CommentsModel.js</include>
+                                    <include>scripts/app/view/comments/CommentsController.js</include>
+                                    <include>scripts/app/view/comments/Comments.js</include>
 
 
 

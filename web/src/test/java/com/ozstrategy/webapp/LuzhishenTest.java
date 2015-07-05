@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ozstrategy.util.Base64Utils;
 import com.ozstrategy.util.RSAUtils;
 import com.ozstrategy.util.ThreeDESUtils;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.http.*;
 import org.apache.http.client.ClientProtocolException;
@@ -18,14 +20,19 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,6 +52,99 @@ public class LuzhishenTest {
         System.out.println(uid);
         
     }
+    @Test
+    public void testHTTP(){
+        try {
+            File file=new File("/Users/lihao1/Downloads/kkk.jpg");
+            if(!file.exists()){
+                file.createNewFile();
+            }
+            URL uri=new URL("http://images.forwallpaper.com/files/thumbs/preview/11/114443__cat-kitten-black-sleeping-ribbon-bow-box_p.jpg");
+            byte[] bytes= IOUtils.toByteArray(uri);
+            FileUtils.writeByteArrayToFile(file,bytes);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @Test
+    public void testJsoup(){
+        try{
+            String base="http://cn.forwallpaper.com";
+            String url="http://cn.forwallpaper.com/images/cats.html";
+            Document doc= Jsoup.connect(url)
+                    .userAgent("Mozilla")
+                    .timeout(3000)
+                    .get();
+            Elements pagea=doc.select("div[class=ui-pages]").select("a");
+            List<String> urls=new ArrayList<String>();
+            urls.add("/images/cats.html");
+            Iterator<Element> iterator = pagea.iterator();
+            while (iterator.hasNext()){
+                Element element=iterator.next();
+                urls.add(element.attr("href"));
+            }
+            urls.remove(urls.size()-1);
+            String lastUrl=urls.get(urls.size()-1);
+
+
+            System.out.println("pageTotal==="+lastUrl);
+            List<String> itemUrl=new ArrayList<String>();
+
+
+            for(String uu:urls){
+                doc=Jsoup.connect(base+uu)
+                        .userAgent("Mozilla")
+                        .timeout(3000)
+                        .get();
+                Elements elements=doc.select("div[class=ui-cnt]").select("ul li a");
+                Iterator<Element> al = elements.iterator();
+                while (al.hasNext()){
+                    Element element=al.next();
+                    itemUrl.add(element.attr("href"));
+//                    System.out.println(element.attr("href"));
+                }
+
+            }
+
+            for(String item:itemUrl){
+                doc=Jsoup.connect(base+item)
+                        .userAgent("Mozilla")
+                        .timeout(3000)
+                        .get();
+                Element element=doc.select("#bigImg").last();
+                String src=element.attr("src");
+                String fileName=src.substring(src.lastIndexOf("/")+1);
+                System.out.println("src=="+src);
+                System.out.println("fileName=="+fileName);
+
+                try{
+                    URL uri=new URL(src);
+                    byte[] bytes= IOUtils.toByteArray(uri);
+                    File file=new File("/Users/lihao1/Downloads/crawlerTest/"+fileName);
+                    if(!file.exists()){
+                        file.createNewFile();
+                    }
+                    FileUtils.writeByteArrayToFile(file, bytes);
+                }catch (Exception e){
+                    e.printStackTrace();
+
+                }
+
+
+
+            }
+
+
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
     /**
      * 远程地址http://121.40.83.214:8080/luzhishen/
      */
@@ -58,11 +158,12 @@ public class LuzhishenTest {
      */
     @Test
     public void testRegister() throws Exception{
-        String url="http://121.40.83.214:8080/luzhishen/app/register";
+//        String url="http://121.40.83.214:8080/luzhishen/app/register";
+        String url="http://127.0.0.1:8080/luzhishen/app/register";
         HttpPost httpost = new HttpPost(url);
         List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-        nvps.add(new BasicNameValuePair("username", "admin"));
-        nvps.add(new BasicNameValuePair("password", "tomcat"));
+        nvps.add(new BasicNameValuePair("username", "ld"));
+        nvps.add(new BasicNameValuePair("password", "111111"));
 
         try {
             httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
@@ -86,7 +187,7 @@ public class LuzhishenTest {
 
         String body = null;
         try {
-            body = EntityUtils.toString(entity,"GBK");
+            body = EntityUtils.toString(entity,"UTF-8");
         } catch (ParseException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -105,18 +206,28 @@ public class LuzhishenTest {
      */
     @Test
     public void testLogin() throws Exception{
-        String url="http://271387591.pagekite.me/luzhishen/app/login";
-//        String url="http://271387591.pagekite.me/luzhishen/app/login";
+//        String url="http://127.0.0.1:8081/luzhishen/app/login";
+        String url="http://121.40.83.214:8080/luzhishen/app/login";
         HttpPost httpost = new HttpPost(url);
         List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 
-        nvps.add(new BasicNameValuePair("login_name", "lihao"));
-        nvps.add(new BasicNameValuePair("login_password", "tomcat"));
+        nvps.add(new BasicNameValuePair("login_name", "ld"));
+        nvps.add(new BasicNameValuePair("login_password", "111111"));
 //        nvps.add(new BasicNameValuePair("platform", "PC"));
         httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
         DefaultHttpClient httpclient = new DefaultHttpClient();
         HttpResponse response = null;
         response = httpclient.execute(httpost);
+        Header[] headers = response.getHeaders("Set-Cookie");
+        for(Header header:headers){
+            System.out.println(header.getName()+"==="+header.getValue());
+            HeaderElement[] elements=  header.getElements();
+            for(HeaderElement element:elements){
+
+                System.out.println(element.getName()+"===="+element.getValue());
+                System.out.println("element.toString()==="+element.toString());
+            }
+        }
         String coockie = response.getFirstHeader("Set-Cookie").getValue();
         HttpEntity entity = response.getEntity();
         String charset = EntityUtils.getContentCharSet(entity);
@@ -134,7 +245,7 @@ public class LuzhishenTest {
     }
      /**
       * 反馈意见
-     * 接口参数：comment，登录时的cookie
+     * 接口参数：comment，登录时的cookie,contract联系方式
      *
      * @throws Exception
      */
@@ -144,6 +255,7 @@ public class LuzhishenTest {
         HttpPost httpost = new HttpPost(url);
         List<NameValuePair> nvps = new ArrayList<NameValuePair>();
         nvps.add(new BasicNameValuePair("comments", "的会计法律框架撒旦就发了"));
+        nvps.add(new BasicNameValuePair("contract", "13541287474"));
         httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
         httpost.addHeader("Cookie","JSESSIONID=edxmvfg6ar0h;Path=/luzhishen");
         DefaultHttpClient httpclient = new DefaultHttpClient();
@@ -166,12 +278,12 @@ public class LuzhishenTest {
      */
     @Test
     public void testGetUserCredits() throws Exception{
-        String url="http://127.0.0.1:8080/luzhishen/app/getUserCredits";
+        String url="http://127.0.0.1:8081/luzhishen/app/getUserCredits";
         HttpPost httpost = new HttpPost(url);
         List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 
         httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
-        httpost.addHeader("Cookie","JSESSIONID=o4pwe8ib8d9l;Path=/luzhishen");
+        httpost.addHeader("Cookie","JSESSIONID=1u2zo713aoxdh");
         DefaultHttpClient httpclient = new DefaultHttpClient();
         HttpResponse response = null;
         response = httpclient.execute(httpost);
@@ -319,12 +431,16 @@ public class LuzhishenTest {
         body = EntityUtils.toString(entity);
         System.out.println(body);
         httpclient.getConnectionManager().shutdown();
+
+
         if(body!=null && !body.equals("")){
             Map<String,Object> map=new ObjectMapper().readValue(body, Map.class);
             String data= ObjectUtils.toString(map.get("data"));//取得接口数据
             byte[] base64=Base64Utils.decode(data);//base64转码
             String desData=new String(ThreeDESUtils.decrypt(base64));//DES解密
             System.out.println(desData);//接口数据
+
+
             map=new ObjectMapper().readValue(desData,Map.class);//转换接口数据
 
             String publicKey=ObjectUtils.toString(map.get("publicKey"));//取得RAS解密公钥
@@ -334,6 +450,7 @@ public class LuzhishenTest {
             String billsData=new String(billsByte);//取得商户信息
             System.out.println(billsData);
             //{"id":1,"orderNo":"15052912420001","notify_url":"http://kksdjfkj","money":2000.0}
+//            billsData="{\"publicKey\":\"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC0B21R0OM04Kz1ZpmhUS+zrgZI4p8RTCnMO3hrIv0wMY+Bpho6ks7QKJ34NgxjPIq9FxwIrON5UJWADnYDM/Zu7XDmLqQGSWWIFsILZvySma7oH8JCpgx/EoEIE2Ic1pRyfFMyxfToqhLKF8iaFX6HLQRGnpmAvrq0zznhWIRP4wIDAQAB\",\"bills\":\"YmgxFy4wMu+JQvco20iPe88dxwgjANuO+Fzxu8pO9JGCbfqmsC60rhUnilD8k6TcnGZPtleNZSkVSdxdFWMhKEmyOs9uKqcE5SZT1uDYuINjCTEmdoz2387DXykdSqLLHk7i3lQoX+iMvSjd5Ayp26I4oMcol2miy9gNxUXm/a1TlLFh3Xjm2k7tFuYMohm6HmmJccgR5UuibPOq6npqPxJ49nszPg2Y8ri09JuI8/deiqz1XnX9Cw9XWUWs5xxBE/zSI+ZCPnX72r40I7cQmZEez15N4/WGAOPOcy62elNxAb1fbc9O0H1YNhzYTcLqOi2nI2RA3Vg83IYBytO/cQ==\"}";
 
 
             map=new ObjectMapper().readValue(billsData,Map.class);
@@ -346,7 +463,7 @@ public class LuzhishenTest {
         }
     }
     /**
-     * 获取出售积分列表
+     * 获取买家订单
      * 登录时的cookie
      * 接口参数：
      * status:订单状态(必须)   0 待支付 1 已支付 2 失败
@@ -357,15 +474,15 @@ public class LuzhishenTest {
      */
     @Test
     public void testGetOrders() throws Exception{
-        String url="http://127.0.0.1:8080/luzhishen/app/getOrders";
+        String url="http://127.0.0.1:8081/luzhishen/app/getOrders";
         HttpPost httpost = new HttpPost(url);
         List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 
-        nvps.add(new BasicNameValuePair("status", "0"));
+        nvps.add(new BasicNameValuePair("status", "1"));
         nvps.add(new BasicNameValuePair("start", "0"));
         nvps.add(new BasicNameValuePair("limit", "25"));
         httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
-        httpost.addHeader("Cookie","JSESSIONID=158hur38idc3s;Path=/luzhishen");
+        httpost.addHeader("Cookie","JSESSIONID=1sci7xwvqugfs;Path=/luzhishen");
         DefaultHttpClient httpclient = new DefaultHttpClient();
         HttpResponse response = null;
         response = httpclient.execute(httpost);
@@ -378,6 +495,40 @@ public class LuzhishenTest {
         System.out.println(body);
         httpclient.getConnectionManager().shutdown();
     }
+    /**
+     * 获取卖家订单
+     * 登录时的cookie
+     * 接口参数：
+     * status:订单状态(必须)   0 正在别人购买 1 正在出售的 2 出售成功的
+     * start:数据起始量(必须)，比如：从第0条数据开始，start=0,从第34条数据开始：start=34 （必须，并且为数字）必须
+     * limit:每次获取的数据量(必须),默认每次25条，（可以不传，默认25条）必须
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testGetBills() throws Exception{
+        String url="http://127.0.0.1:8081/luzhishen/app/getBills";
+        HttpPost httpost = new HttpPost(url);
+        List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+
+        nvps.add(new BasicNameValuePair("status", "0"));
+        nvps.add(new BasicNameValuePair("start", "0"));
+        nvps.add(new BasicNameValuePair("limit", "25"));
+        httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+        httpost.addHeader("Cookie","JSESSIONID=1sci7xwvqugfs;Path=/luzhishen");
+        DefaultHttpClient httpclient = new DefaultHttpClient();
+        HttpResponse response = null;
+        response = httpclient.execute(httpost);
+        HttpEntity entity = response.getEntity();
+
+        String charset = EntityUtils.getContentCharSet(entity);
+
+        String body = null;
+        body = EntityUtils.toString(entity);
+        System.out.println(body);
+        httpclient.getConnectionManager().shutdown();
+    }
+
     /**
      * 获取用户平台金
      * 登录时的cookie
@@ -467,6 +618,38 @@ public class LuzhishenTest {
         httpclient.getConnectionManager().shutdown();
     }
  /**
+     * 获取用户提现列表
+     * 登录时的cookie
+      * 接口参数：status   0 未处理，1 成功 ， 2  失败，
+    * start:数据起始量(必须)，比如：从第0条数据开始，start=0,从第34条数据开始：start=34 （必须，并且为数字）必须
+     * limit:每次获取的数据量(必须),默认每次25条，（可以不传，默认25条）必须
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testGetApply() throws Exception{
+        String url="http://121.40.83.214:8080/luzhishen/app/getApply";
+        HttpPost httpost = new HttpPost(url);
+        List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+        nvps.add(new BasicNameValuePair("status", "1"));
+        nvps.add(new BasicNameValuePair("start", "0"));
+        nvps.add(new BasicNameValuePair("limit", "25"));
+
+        httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+        httpost.addHeader("Cookie","JSESSIONID=C972A33D23384FE72E479D784AFACCDE; Path=/luzhishen");
+        DefaultHttpClient httpclient = new DefaultHttpClient();
+        HttpResponse response = null;
+        response = httpclient.execute(httpost);
+        HttpEntity entity = response.getEntity();
+
+        String charset = EntityUtils.getContentCharSet(entity);
+
+        String body = null;
+        body = EntityUtils.toString(entity);
+        System.out.println(body);
+        httpclient.getConnectionManager().shutdown();
+    }
+    /**
      * 获取用户历史提现账号
      * 登录时的cookie
       * 接口参数：
@@ -495,6 +678,7 @@ public class LuzhishenTest {
         System.out.println(body);
         httpclient.getConnectionManager().shutdown();
     }
+
 
 
     /**
@@ -565,11 +749,12 @@ public class LuzhishenTest {
      */
     @Test
     public void testReportPoints() throws Exception{
-        String url="http://127.0.0.1:8080/luzhishen/app/reportPoints";
+        String url="http://121.40.83.214:8080/luzhishen/app/reportPoints";
+//        String url="http://127.0.0.1:8081/luzhishen/app/reportPoints";
         HttpPost httpost = new HttpPost(url);
         List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 
-        nvps.add(new BasicNameValuePair("user_id", "1"));
+        nvps.add(new BasicNameValuePair("user_id", "2"));
         nvps.add(new BasicNameValuePair("SSID", "1,2,3,4,5,6"));
         nvps.add(new BasicNameValuePair("BSSID", "1,2,3,4,5,6"));
         nvps.add(new BasicNameValuePair("points", "1"));

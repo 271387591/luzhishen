@@ -12,6 +12,7 @@ import com.ozstrategy.webapp.command.JsonReaderResponse;
 import com.ozstrategy.webapp.command.JsonReaderSingleResponse;
 import com.ozstrategy.webapp.command.credits.CreditsDetailCommand;
 import com.ozstrategy.webapp.command.credits.UserCreditsCommand;
+import com.ozstrategy.webapp.command.order.CreditsOrderCommand;
 import com.ozstrategy.webapp.command.userrole.RoleCommand;
 import com.ozstrategy.webapp.command.userrole.SimpleRoleCommand;
 import com.ozstrategy.webapp.command.userrole.UserCommand;
@@ -113,7 +114,8 @@ public class CreditsController extends BaseController {
         try{
             User user=userManager.get(parseLong(user_id));
             userCreditsManager.reportPoints(user, SSID, BSSID, points);
-            return new BaseResultCommand("",Boolean.TRUE);
+            UserCredits credits=userCreditsManager.get(user.getUserCredits().getId());
+            return new BaseResultCommand(new UserCreditsCommand(credits));
         }catch (Exception e){
 
         }
@@ -126,13 +128,18 @@ public class CreditsController extends BaseController {
         String points =request.getParameter("points");
         try{
             User user=userManager.get(parseLong(user_id));
-            User target=userManager.get(parseLong(give_id));
+            User target=userManager.getUserByUsername(give_id);
+            if(target==null){
+                return new BaseResultCommand("对方账号不存",Boolean.FALSE);
+            }
             userCreditsManager.givePoints(user, target, parseDouble(points));
             return new BaseResultCommand("",Boolean.TRUE);
         }catch (Exception e){
         }
         return new BaseResultCommand("赠送失败",Boolean.FALSE);
     }
+
+
 
 
 

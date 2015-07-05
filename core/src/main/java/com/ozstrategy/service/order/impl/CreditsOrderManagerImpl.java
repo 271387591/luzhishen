@@ -27,6 +27,8 @@ import com.ozstrategy.service.order.CreditsOrderManager;
 import com.ozstrategy.util.Base64Utils;
 import com.ozstrategy.util.RSAUtils;
 import com.ozstrategy.util.ThreeDESUtils;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,7 +84,7 @@ public class CreditsOrderManagerImpl extends GenericManagerImpl<CreditsOrder,Lon
         bill.setStatus(CreditsBillStatus.Lock.ordinal());
         creditsBillDao.saveOrUpdate(bill);
         try{
-            String publicKey="",privateKey="",notify_url="",pid="",secret="";
+            String publicKey="",privateKey="",notify_url="",pid="",seller_email="";
             config=applicationConfigDao.getConfig("publicKey");
             if(config!=null){
                 publicKey=config.getSystemValue();
@@ -99,9 +101,9 @@ public class CreditsOrderManagerImpl extends GenericManagerImpl<CreditsOrder,Lon
             if(config!=null){
                 pid=config.getSystemValue();
             }
-            config=applicationConfigDao.getConfig("secret");
+            config=applicationConfigDao.getConfig("seller_email");
             if(config!=null){
-                secret=config.getSystemValue();
+                seller_email=config.getSystemValue();
             }
 
 
@@ -112,7 +114,7 @@ public class CreditsOrderManagerImpl extends GenericManagerImpl<CreditsOrder,Lon
             data.put("orderNo",order.getOrderNo());
             data.put("money",order.getMoney());
             data.put("notify_url",notify_url);
-            data.put("secret",secret);
+            data.put("seller_email",seller_email);
             data.put("pid",pid);
             String dataStr=new ObjectMapper().writeValueAsString(data);
             byte[] dataStrData = dataStr.getBytes();
@@ -131,6 +133,7 @@ public class CreditsOrderManagerImpl extends GenericManagerImpl<CreditsOrder,Lon
     public void cancelOrders() {
         Map<String,Object> map=new HashMap<String, Object>();
         map.put("Q_loseDate_LE_D", DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+        map.put("Q_status_EQ_N", CreditsOrderStatus.NoPayment.ordinal());
         List<CreditsOrder> orders=creditsOrderDao.listPage(map,0,50);
         if(orders!=null && orders.size()>0){
             for(CreditsOrder order:orders){
@@ -147,25 +150,12 @@ public class CreditsOrderManagerImpl extends GenericManagerImpl<CreditsOrder,Lon
     public List<Map<String, Object>> getOrderChart() {
         return creditsOrderDao.getOrderChart();
     }
-    public void mobileNotice(Map<String, Object> requestParams, String out_trade_no, String trade_no, String trade_status) throws Exception {
-        Map<String,String> params = new HashMap<String,String>();
-        for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext();) {
-            try{
-                String name = (String) iter.next();
-                String[] values = (String[]) requestParams.get(name);
-                String valueStr = "";
-                for (int i = 0; i < values.length; i++) {
-                    valueStr = (i == values.length - 1) ? valueStr + values[i]
-                            : valueStr + values[i] + ",";
-                }
-                //乱码解决，这段代码在出现乱码时使用。如果mysign和sign不相等也可以使用这段代码转化
-                valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
-                params.put(name, valueStr);
 
-            }catch (Exception e){
-            }
-        }
-        if(AlipayNotify.verify(params)) {//验证成功
+    public void mobileNoticeSuccess(Map<String, String> map) {
+        String out_trade_no= map.get("out_trade_no");
+        String trade_no= map.get("trade_no");
+        String trade_status= map.get("trade_status");
+        if(StringUtils.isNotEmpty(out_trade_no)){
             Map<String,Object> orderMap=new HashMap<String, Object>();
             orderMap.put("Q_orderNo_EQ_S",out_trade_no);
             CreditsOrder order=creditsOrderDao.getByParams(orderMap);
@@ -191,6 +181,7 @@ public class CreditsOrderManagerImpl extends GenericManagerImpl<CreditsOrder,Lon
                 userCreditsDetail.setDeal(bill.getCreator());
                 userCreditsDetail.setCreateDate(new Date());
                 userCreditsDetail.setLastUpdateDate(new Date());
+                userCreditsDetail.setPrice(order.getPrice());
                 creditsDetailDao.saveOrUpdate(userCreditsDetail);
 
 
@@ -199,8 +190,9 @@ public class CreditsOrderManagerImpl extends GenericManagerImpl<CreditsOrder,Lon
                 if(bill.getStatus()==CreditsBillStatus.Lock.ordinal()){
                     Double exist=billUserCredits.getTotal();
                     Double billSum=bill.getCreditsSum();
-                    Double newCredits=exist-billSum;
-                    billUserCredits.setTotal(newCredits);
+                    Double newCredits=exist-order.getCredits();
+//                    billUserCredits.setTotal(newCredits);
+                    billUserCredits.setLastType(CreditsType.Sale.ordinal());
                     userCreditsDao.saveOrUpdate(billUserCredits);
                 }
                 CreditsDetail detail=new CreditsDetail();
@@ -212,6 +204,7 @@ public class CreditsOrderManagerImpl extends GenericManagerImpl<CreditsOrder,Lon
                 detail.setDeal(order.getCreator());
                 detail.setCreateDate(new Date());
                 detail.setLastUpdateDate(new Date());
+                detail.setPrice(order.getPrice());
                 creditsDetailDao.saveOrUpdate(detail);
 
 
@@ -231,17 +224,36 @@ public class CreditsOrderManagerImpl extends GenericManagerImpl<CreditsOrder,Lon
                 userMoneyDetail.setCredits(order.getCredits());
                 userMoneyDetail.setPrice(order.getPrice());
                 userMoneyDetailDao.saveOrUpdate(userMoneyDetail);
-                creditsBillDao.remove(bill);
+//                order.setBill(null);
+                bill.setStatus(CreditsBillStatus.HasSale.ordinal());
+                bill.setLastUpdateDate(new Date());
+                creditsBillDao.saveOrUpdate(bill);
             }
+        }
 
-        }else{
+    }
+
+    public void mobileNoticeFail(Map<String, String> map) {
+        String out_trade_no= map.get("out_trade_no");
+        String trade_no= map.get("trade_no");
+        String trade_status= map.get("trade_status");
+        if(StringUtils.isNotEmpty(out_trade_no)){
             Map<String,Object> orderMap=new HashMap<String, Object>();
             orderMap.put("Q_orderNo_EQ_S",out_trade_no);
             CreditsOrder order=creditsOrderDao.getByParams(orderMap);
-            order.setTradeNo(trade_no);
-            order.setTradeStatus(trade_status);
-            order.setStatus(CreditsOrderStatus.Fail.ordinal());
-            creditsOrderDao.saveOrUpdate(order);
+            if(order!=null){
+                order.setTradeNo(trade_no);
+                order.setTradeStatus(trade_status);
+                order.setStatus(CreditsOrderStatus.Fail.ordinal());
+                creditsOrderDao.saveOrUpdate(order);
+                CreditsBill bill = order.getBill();
+                if(bill.getStatus().intValue()==CreditsBillStatus.Lock.ordinal()){
+                    bill.setStatus(CreditsBillStatus.Unlock.ordinal());
+                    creditsBillDao.saveOrUpdate(bill);
+                }
+
+            }
         }
+
     }
 }

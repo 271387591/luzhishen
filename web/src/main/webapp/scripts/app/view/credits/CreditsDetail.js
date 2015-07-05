@@ -63,18 +63,14 @@ Ext.define('App.view.credits.CreditsDetail', {
                         },
                         {
                             flex:1,
+                            text:'买入单价',
+                            dataIndex:'price'
+                        },
+
+                        {
+                            flex:1,
                             text:'对方账号',
                             dataIndex:'dealName'
-                        },
-                        {
-                            flex:1,
-                            text:'设备ID',
-                            dataIndex:'ssid'
-                        },
-                        {
-                            flex:1,
-                            text:'设备Mac地址',
-                            dataIndex:'bssid'
                         }
                     ]
                 },
@@ -120,18 +116,13 @@ Ext.define('App.view.credits.CreditsDetail', {
                         },
                         {
                             flex:1,
+                            text:'出售单价',
+                            dataIndex:'price'
+                        },
+                        {
+                            flex:1,
                             text:'对方账号',
                             dataIndex:'dealName'
-                        },
-                        {
-                            flex:1,
-                            text:'设备ID',
-                            dataIndex:'ssid'
-                        },
-                        {
-                            flex:1,
-                            text:'设备Mac地址',
-                            dataIndex:'bssid'
                         }
                     ]
                 },
@@ -174,16 +165,6 @@ Ext.define('App.view.credits.CreditsDetail', {
                             flex:1,
                             text:'积分数量',
                             dataIndex:'total'
-                        },
-                        {
-                            flex:1,
-                            text:'WIFI积分',
-                            dataIndex:'wifi'
-                        },
-                        {
-                            flex:1,
-                            text:'GPRS积分',
-                            dataIndex:'gprs'
                         },
                         {
                             flex:1,

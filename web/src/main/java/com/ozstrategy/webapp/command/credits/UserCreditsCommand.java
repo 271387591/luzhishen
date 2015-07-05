@@ -25,6 +25,8 @@ public class UserCreditsCommand {
     private String mobile;
     private String lastUsername;
     private Long lastUserId;
+    private String exceed;
+
 
     public UserCreditsCommand() {
     }
@@ -38,6 +40,7 @@ public class UserCreditsCommand {
         this.userId=user.getId();
         this.username= user.getUsername();
         this.mobile=user.getMobile();
+        this.exceed=this.total<0?"1":"0";
     }
 
     public Long getId() {
@@ -118,5 +121,13 @@ public class UserCreditsCommand {
 
     public void setLastUserId(Long lastUserId) {
         this.lastUserId = lastUserId;
+    }
+
+    public String getExceed() {
+        return exceed;
+    }
+
+    public void setExceed(String exceed) {
+        this.exceed = exceed;
     }
 }

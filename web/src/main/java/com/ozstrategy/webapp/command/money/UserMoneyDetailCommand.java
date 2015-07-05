@@ -29,8 +29,11 @@ public class UserMoneyDetailCommand {
         this.type= detail.getType();
         this.total= detail.getTotal();
         this.moneyId= detail.getMoney().getId();
-        this.dealId= detail.getDeal().getId();
-        this.dealName= detail.getDeal().getUsername();
+        User deal=detail.getDeal();
+        if(deal!=null){
+            this.dealId= detail.getDeal().getId();
+            this.dealName= detail.getDeal().getUsername();
+        }
         this.createDate= detail.getCreateDate();
         this.lastUpdateDate= detail.getLastUpdateDate();
         this.credits=detail.getCredits();

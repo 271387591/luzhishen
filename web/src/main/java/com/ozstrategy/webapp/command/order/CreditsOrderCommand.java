@@ -22,6 +22,7 @@ public class CreditsOrderCommand {
     private Date lastUpdateDate;
     private String tradeStatus;
     private String tradeNo;
+    private String dealUsername;
 
     public CreditsOrderCommand() {
     }
@@ -39,6 +40,7 @@ public class CreditsOrderCommand {
         this.lastUpdateDate=order.getLastUpdateDate();
         this.tradeNo=order.getTradeNo();
         this.tradeStatus=order.getTradeStatus();
+        this.dealUsername=order.getBill()!=null?order.getBill().getCreator().getUsername():null;
     }
 
 
@@ -145,5 +147,13 @@ public class CreditsOrderCommand {
 
     public void setTradeNo(String tradeNo) {
         this.tradeNo = tradeNo;
+    }
+
+    public String getDealUsername() {
+        return dealUsername;
+    }
+
+    public void setDealUsername(String dealUsername) {
+        this.dealUsername = dealUsername;
     }
 }

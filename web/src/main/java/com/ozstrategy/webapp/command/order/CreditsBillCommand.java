@@ -14,6 +14,7 @@ public class CreditsBillCommand {
     private Date createDate;
     private Double creditsSum;
     private Double price;
+    private Date lastUpdateDate;
 
     public CreditsBillCommand() {
     }
@@ -24,6 +25,7 @@ public class CreditsBillCommand {
         this.createDate=bill.getCreateDate();
         this.creditsSum=bill.getCreditsSum();
         this.price= bill.getPrice();
+        this.lastUpdateDate=bill.getLastUpdateDate();
     }
 
 
@@ -73,5 +75,13 @@ public class CreditsBillCommand {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Date getLastUpdateDate() {
+        return lastUpdateDate;
+    }
+
+    public void setLastUpdateDate(Date lastUpdateDate) {
+        this.lastUpdateDate = lastUpdateDate;
     }
 }

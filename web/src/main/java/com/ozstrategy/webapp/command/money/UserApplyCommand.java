@@ -50,7 +50,8 @@ public class UserApplyCommand {
             this.lastUsername=last.getUsername();
             this.lastUserId=last.getId();
         }
-        this.batchNo=apply.getSystemRmb().getBachNo();
+
+        this.batchNo=apply.getSystemRmb()!=null?apply.getSystemRmb().getBachNo():null;
         this.successDetail=apply.getSuccessDetail();
         this.failDetail= apply.getFailDetail();
         this.cancelDetail=apply.getCancelDetail();

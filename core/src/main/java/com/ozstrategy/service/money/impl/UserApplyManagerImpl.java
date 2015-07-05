@@ -65,9 +65,6 @@ public class UserApplyManagerImpl extends GenericManagerImpl<UserApply,Long> imp
             systemRmbDao.saveOrUpdate(systemRmb);
             Set<UserApply> userApplies=systemRmb.getUserApplies();
             if(userApplies!=null && userApplies.size()>0){
-
-
-
                 for(UserApply userApply:userApplies){
                     userApply.setStatus(UserApplyStatus.Success.ordinal());
                     userApply.setSuccessDetail(getSuccessDetail(success_details,userApply.getApplyNo()));
@@ -154,7 +151,7 @@ public class UserApplyManagerImpl extends GenericManagerImpl<UserApply,Long> imp
             String aliMail=apply.getUserAliInfo().getEmail();
             String name=apply.getUserAliInfo().getName();
             Double applyRmb=apply.getRmb();
-            builder.append(applyNo).append("^").append(aliMail).append("^").append(name).append("^").append(applyRmb).append("^").append("1111");
+            builder.append(applyNo).append("^").append(aliMail).append("^").append(name).append("^").append(applyRmb).append("^").append("\u7533\u8bf7\u63d0\u73b0");
             detail_dataBuilder.append("|");
             detail_dataBuilder.append(builder);
             batch_fee+=applyRmb;

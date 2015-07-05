@@ -15,7 +15,8 @@ Ext.define('App.main.TabCenter', {
         'App.view.order.OrderList',
         'App.view.order.OrderChart',
         'App.view.money.UserMoney',
-        'App.view.money.UserApply'
+        'App.view.money.UserApply',
+        'App.view.comments.Comments'
     ],
     controller: 'main',
     viewModel: {
@@ -70,20 +71,22 @@ Ext.define('App.main.TabCenter', {
         title: '平台金管理',
         iconCls: 'exec-quarterly-icon'
     },{
-        xtype: 'panel',
+        xtype: 'orderList',
         title: '订单查询',
-        iconCls: 'exec-quarterly-icon',
-            layout:'border',
-            items:[
-                {
-                    xtype:'orderList',
-                    region:'center'
-                },
-                {
-                    xtype:'orderChart',
-                    region:'west'
-                }
-            ]
+        iconCls: 'exec-quarterly-icon'
+            //layout:'border',
+            //items:[
+            //    {
+            //        xtype:'orderList',
+            //        region:'center'
+            //    },
+            //    {
+            //        collapsible:true,
+            //        collapsedCls:'',
+            //        xtype:'orderChart',
+            //        region:'west'
+            //    }
+            //]
 
     },{
         xtype: 'userCredits',
@@ -92,6 +95,10 @@ Ext.define('App.main.TabCenter', {
     },{
         xtype: 'userCenter',
         title: '用户模块',
+        iconCls: 'exec-news-icon'
+    },{
+        xtype: 'comments',
+        title: '用户反馈',
         iconCls: 'exec-news-icon'
     },{
         xtype: 'appStore',

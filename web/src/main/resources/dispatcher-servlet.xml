@@ -19,6 +19,7 @@
     <mvc:annotation-driven/>
 
 
+
     <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" p:order="0">
     </bean>
     <!-- Maps request paths to @Controller classes; e.g. a path of /hotels looks for a controller named HotelsController -->

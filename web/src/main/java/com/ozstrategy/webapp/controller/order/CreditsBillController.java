@@ -50,7 +50,7 @@ public class CreditsBillController extends BaseController {
     public JsonReaderResponse<CreditsOrderCommand> listOrders(HttpServletRequest request) {
         try{
             Map<String,Object> map=requestMap(request);
-            map.put("Q_loseDate_GE_D", DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+//            map.put("Q_loseDate_GE_D", DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
             List<CreditsOrder> orders=creditsOrderManager.listPage(map,obtainStart(request), obtainLimit(request));
             List<CreditsOrderCommand> commands=new ArrayList<CreditsOrderCommand>();
             if(orders!=null && orders.size()>0){
@@ -228,7 +228,7 @@ public class CreditsBillController extends BaseController {
             if(NumberUtils.isNumber(status)){
                 User user=userManager.getUserByUsername(username);
                 Map<String,Object> map=new HashMap<String, Object>();
-                map.put("Q_loseDate_GE_D", DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+//                map.put("Q_loseDate_GE_D", DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
                 map.put("Q_status_EQ_N", new Integer(status));
                 map.put("Q_creator.id_EQ_L", user.getId());
                 List<CreditsOrder> orders=creditsOrderManager.listPage(map,obtainStart(request), obtainLimit(request));
@@ -262,28 +262,32 @@ public class CreditsBillController extends BaseController {
         }
         return new JsonReaderSingleResponse<UserCreditsCommand>(null,false,"请求失败");
     }
-
-
-
-
-
-
-    @RequestMapping("mobileNotice")
-    public void mobileNotice(HttpServletRequest request) {
-        try{
-            Map map=request.getParameterMap();
-            String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"),"UTF-8");
-
-            //支付宝交易号
-
-            String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"),"UTF-8");
-
-            //交易状态
-            String trade_status = new String(request.getParameter("trade_status").getBytes("ISO-8859-1"),"UTF-8");
-
-            creditsOrderManager.mobileNotice(map,out_trade_no,trade_no,trade_status);
-        }catch (Exception e){
-            logger.error("mobileNotice",e);
+    @RequestMapping("getBills")
+    public JsonReaderResponse<CreditsBillCommand> getBills(HttpServletRequest request) {
+        String username=request.getRemoteUser();
+        String status=obtain(request,"status");
+        if(StringUtils.isEmpty(username)){
+            return new JsonReaderResponse<CreditsBillCommand>(null,false,"登录超时");
         }
+        try{
+            User user=userManager.getUserByUsername(username);
+            Map<String,Object> map=new HashMap<String, Object>();
+            map.put("Q_status_EQ_N", new Integer(status));
+            map.put("Q_creator.id_EQ_L", user.getId());
+            List<CreditsBill> roles        = creditsBillManager.listPage(map, obtainStart(request), obtainLimit(request));
+            List<CreditsBillCommand> roleCommands = new ArrayList<CreditsBillCommand>();
+            if ((roles != null) && (roles.size() > 0)) {
+                for (CreditsBill role : roles) {
+                    CreditsBillCommand command=new CreditsBillCommand(role);
+                    roleCommands.add(command);
+                }
+            }
+            Integer count = creditsBillManager.count(map);
+            return new JsonReaderResponse<CreditsBillCommand>(roleCommands, true,count,"");
+
+        }catch (Exception e){
+        }
+        return new JsonReaderResponse<CreditsBillCommand>(null,Boolean.FALSE,"获取失败");
     }
+
 }

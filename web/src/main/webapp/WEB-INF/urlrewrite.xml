@@ -49,6 +49,18 @@
         <to>/service/order/getOrders</to>
     </rule>
     <rule>
+        <from>/app/getBills</from>
+        <to>/service/order/getBills</to>
+    </rule>
+    <rule>
+        <from>/app/getApply</from>
+        <to>/service/apply/getApply</to>
+    </rule>
+
+
+
+
+    <rule>
         <from>/app/getCredits</from>
         <to>/service/order/getCredits</to>
     </rule>
@@ -86,6 +98,7 @@
         <from>/app/givePoints</from>
         <to>/service/credits/givePoints</to>
     </rule>
+
 
 
     <rule>

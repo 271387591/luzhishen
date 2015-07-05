@@ -30,4 +30,6 @@ public interface GenericManager<T, PK extends Serializable> {
     List<T> listAll(Map<String,Object> params);
 
     T getByParams(Map<String,Object> params);
+
+    void batchRemove(List<T> list);
 } 

@@ -16,5 +16,7 @@ public interface CreditsOrderManager extends GenericManager<CreditsOrder,Long> {
     String createOrder(User user,CreditsOrder order,CreditsBill bill);
     void cancelOrders();
     List<Map<String,Object>> getOrderChart();
-    void mobileNotice(Map<String,Object> map,String out_trade_no,String trade_no,String trade_status)throws Exception;
+    void mobileNoticeSuccess(Map<String,String> map);
+    void mobileNoticeFail(Map<String,String> map);
+
 }

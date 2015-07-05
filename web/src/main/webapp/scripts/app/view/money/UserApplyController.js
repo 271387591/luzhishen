@@ -43,7 +43,7 @@ Ext.define('App.view.money.UserApplyController', {
         var grid =  this.getView().down('#nopayGrid');
         var sModel=grid.getSelectionModel();
         if(!sModel.hasSelection()){
-            Ext.Msg.alert('提示','请选择用户');
+            Ext.Msg.alert('提示','请选择申请');
             return;
         }
         var recs=sModel.getSelection();
