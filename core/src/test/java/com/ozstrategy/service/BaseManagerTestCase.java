@@ -9,8 +9,11 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 @ContextConfiguration(locations = {
-        "classpath:/applicationContext-resources.xml", "classpath:/applicationContext-dao.xml",
-        "classpath:/applicationContext-service.xml", "classpath*:/**/applicationContext.xml"
+        "classpath:/applicationContext-resources.xml",
+        "classpath:/applicationContext-dao.xml",
+        "classpath:/applicationContext-service.xml",
+        "classpath:/applicationContext-quartz.xml",
+        "classpath*:/**/applicationContext.xml"
 })
 /**
  * Test classes can extend this manager based on a spring context.

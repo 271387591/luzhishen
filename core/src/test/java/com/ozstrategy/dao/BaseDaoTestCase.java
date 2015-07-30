@@ -24,6 +24,8 @@ import java.util.ResourceBundle;
 @ContextConfiguration(
         locations = {"classpath:/applicationContext-resources.xml",
                 "classpath:/applicationContext-dao.xml",
+                "classpath:/applicationContext-service.xml",
+                "classpath:/applicationContext-service.xml",
                 "classpath*:/applicationContext.xml",
                 "classpath:**/applicationContext*.xml"})
 public abstract class BaseDaoTestCase extends AbstractTransactionalJUnit4SpringContextTests {
